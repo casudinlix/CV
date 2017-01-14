@@ -27,7 +27,7 @@
                          <th>User Name</th>
                          <th>Real Name</th>
                          <th>Role</th>
-                         <th>User group</th>
+
                          <th>Action</th>
                        </tr>
                      </thead>
@@ -41,6 +41,5 @@
 
                      </tbody>
                    </table>
-                 </div>
-               </div>
-             </div>
+
+                    

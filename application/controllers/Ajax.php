@@ -31,12 +31,12 @@ public function users()
 array( 'db' => '`u`.`realname`', 'dt' => 1, 'field' => 'realname' ),
     //array( 'db' => 'realname',  'dt' => 1, 'field' => 'realname' ),
     //array( 'db' => 'role',   'dt' => 2, 'field' => 'role' ),
-array( 'db' => '`u`.`realname`', 'dt' => 2, 'field' => 'role' ),
+array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
     //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
-array( 'db' => '`u`.`user_grop`', 'dt' => 3, 'field' => 'user_grop' ),
 
-    array('db' => '`u`.`username`', 'dt' => 4, 'field' => 'username', 'formatter' => function( $d ) {
-          return '<a href="'. site_url('super/setting_user/') .'' . $d . '"><i class=\'fa fa-edit fa-lg faa-tada animated\' title=\'Edit\'></i>Edit</a> <a href="'. site_url('super/setting_user/') .'' . $d . '"><i class=\'fa fa-edit fa-lg faa-tada animated\' title=\'Edit\'></i>Edit</a>';
+
+    array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+          return '<a href="'. site_url('dashboard/edit_user/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a> <a href="'. site_url('super/setting_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-trash \' title=\'Delete\'></i>Delete</a>';
       })
 );
   // SQL server connection information

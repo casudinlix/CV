@@ -42,6 +42,33 @@
         <script src="<?php echo duddin();?>pdfmake/build/vfs_fonts.js"></script>
         <!-- Select2 -->
         <script src="<?php echo duddin();?>select2/dist/js/select2.full.min.js"></script>
+        <script type="text/javascript">
+        function checkPasswordMatch() {
+          var password = $("#txtNewPassword").val();
+          var confirmPassword = $("#txtConfirmPassword").val();
+
+          if (password != confirmPassword)
+              $("#divCheckPasswordMatch").html("Passwords do not match!").css("color","red");
+
+          else
+              $("#divCheckPasswordMatch").html("Passwords match.").css("color","green");
+
+        }
+
+        $(document).ready(function () {
+         $("#txtConfirmPassword").keyup(checkPasswordMatch);
+        });
+        </script>
+        <!--Untuk sweetalert-->
+<?php if ($m): ?>
+  <script type="text/javascript">
+  swal("Good job!", "Data Has Ben Saved!", "success")
+  </script>
+<?php endif; ?>
+
+
+<!--Untuk sweetalert-->
+
 
         <!-- Select2 -->
         <script>
