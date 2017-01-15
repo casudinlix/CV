@@ -30,6 +30,7 @@ public function setting_users()
   $data['title']='Rumah Kreasi';
   $data['namaku']=$this->session->userdata('nama');
   $data['user']=$this->db->get('users')->result();
+
 $data['m']=$this->session->flashdata('m');
   $this->load->view('users/dashboard',$data);
   $this->load->view('users/modul/administrator/setting/user',$data);

@@ -67,6 +67,41 @@
 <?php endif; ?>
 
 
+
+<script type="text/javascript">
+
+function confirmDelete2($d) {
+
+  swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this imaginary file!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false
+
+  }, function (isConfirm) {
+
+    var id =$d;
+      if (!isConfirm) return;
+      $.ajax({
+          url: "<?php echo site_url('ajax/delet_user/')?>",
+          type: "POST",
+            data:"id",
+          dataType: "html",
+          success: function () {
+              swal("Done!", "It was succesfully deleted!", "success");
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error deleting!", "Please try again", "error");
+          }
+      });
+  });
+}
+</script>
+
 <!--Untuk sweetalert-->
 
 
@@ -139,8 +174,10 @@
         "serverSide": true,
         "ajax": "<?php echo site_url('ajax/users'); ?>",
 
-       });
 
+
+       });
+       
 
        $('#datatable-keytable').DataTable({
          keys: true

@@ -36,9 +36,12 @@ array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
 
 
     array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
-          return '<a href="'. site_url('dashboard/edit_user/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a> <a href="'. site_url('super/setting_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-trash \' title=\'Delete\'></i>Delete</a>';
+          return '<a href="'. site_url('dashboard/edit_user/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a> <a onclick=\'confirmDelete2()\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i>Delete</a>';
       })
 );
+
+
+
   // SQL server connection information
   $sql_details = array(
   	'user' => $this->db->username,
@@ -58,6 +61,15 @@ array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
   	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery,$extraWhere)
   );
 
+}
+public function delet_user($d)
+{
+//$id=$this->input->GET('id');
+$id=$this->uri->segment(3);
+$this->db->where('username',$id);
+$this->db->delete('users');
+
+  # code...
 }
 
 }
