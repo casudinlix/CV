@@ -76,18 +76,17 @@
 function confirmDelete2($d) {
 var id = $d;
   swal({
-      title: "Are you sure?",
-      text: "You will not be able to recover this users!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonClass: "btn-danger",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel plx!",
-      closeOnConfirm: true,
-      closeOnCancel: true
+title: "Are you sure?",
+text: "You will not be able to recover this imaginary file!",
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
 
 
-  }, function (isConfirm) {
+ function (isConfirm) {
+
 
 
     var url1= "<?php echo site_url('ajax/delet_user/') ?>";
@@ -99,8 +98,6 @@ var id = $d;
 
           dataType: "HTML",
           success: function () {
-              swal("Done!", "It was succesfully deleted!", "success");
-
               setTimeout(function () {
                   swal(" request finished!");
                   window.location.reload();
