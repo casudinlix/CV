@@ -66,40 +66,57 @@
   </script>
 <?php endif; ?>
 
-
+<?php if ($this->session->set_flashdata('hapus', 'value')): ?>
+  <script type="text/javascript">
+    swal("User Deleted!", "You clicked the button!", "success")
+  </script>
+<?php endif; ?>
 
 <script type="text/javascript">
-
 function confirmDelete2($d) {
-
+var id = $d;
   swal({
       title: "Are you sure?",
-      text: "You will not be able to recover this imaginary file!",
+      text: "You will not be able to recover this users!",
       type: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
+      confirmButtonClass: "btn-danger",
       confirmButtonText: "Yes, delete it!",
-      closeOnConfirm: false
+      cancelButtonText: "No, cancel plx!",
+      closeOnConfirm: true,
+      closeOnCancel: true
+
 
   }, function (isConfirm) {
 
-    var id =$d;
+
+    var url1= "<?php echo site_url('ajax/delet_user/') ?>";
+
       if (!isConfirm) return;
       $.ajax({
-          url: "<?php echo site_url('ajax/delet_user/')?>",
+          url: url1+id,
           type: "POST",
-            data:"id",
-          dataType: "html",
+
+          dataType: "HTML",
           success: function () {
               swal("Done!", "It was succesfully deleted!", "success");
+
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 2000);
+
 
           },
           error: function (xhr, ajaxOptions, thrownError) {
               swal("Error deleting!", "Please try again", "error");
           }
+
       });
-  });
+
+});
 }
+
 </script>
 
 <!--Untuk sweetalert-->
@@ -168,16 +185,13 @@ function confirmDelete2($d) {
        $('#user').dataTable({
          keys: true,
          "processing": true,
-         "serverSide": false,
+         "serverSide": true,
 
         fixedHeader: true,
         "serverSide": true,
-        "ajax": "<?php echo site_url('ajax/users'); ?>",
+        "ajax": "<?php echo site_url('ajax/users'); ?>"
+      });
 
-
-
-       });
-       
 
        $('#datatable-keytable').DataTable({
          keys: true

@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller{
   {
     parent::__construct();
     //Codeigniter : Write Less Do More
-    if ($this->session->userdata('grop')==false) {
+    if (!$this->session->userdata('role')=='super-user') {
 			redirect('home');
 		}
   }
@@ -47,5 +47,10 @@ public function add_user()
   $this->load->view('users/modul/administrator/setting/add_user',$data);
   $this->load->view('users/bawah',$data);
 }
-
+public function hapus($d)
+{
+$r=  $this->db->get('users', $d);
+  json_encode($r);
+  # code...
+}
 }

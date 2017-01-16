@@ -71,7 +71,7 @@ class Home extends CI_Controller {
 				$sess_data['nama'] = $data->realname;
 				//$sess_data['foto'] = $data->foto;
 				$sess_data['role'] = $data->role;
-        $sess_data['grop'] = $data->user_grop;
+        
 				$this->session->set_userdata($sess_data);
 
 			}

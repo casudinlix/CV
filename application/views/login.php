@@ -90,7 +90,9 @@
 <script src="<?php echo duddin();?>bootstrap-sweetalert-master/dist/sweetalert.min.js"></script>
 
 <?php if ($this->session->flashdata('gagal')): ?>
-<script>swal({title: "Password Atau Username Salah!", text: "Silakan coba lagi", timer: 3000, type: "error", showConfirmButton: false })</script>
+<script>swal(
+  {title: "Password Atau Username Salah!", text: "Silakan coba lagi", timer: 3000, type: "error", showConfirmButton: false }
+)</script>
 <?php endif; ?>
 
 

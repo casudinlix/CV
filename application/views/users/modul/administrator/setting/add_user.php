@@ -68,7 +68,7 @@
                       <option></option>
                       <option value="super-user">Super User</option>
                       <option value="finance">Finace</option>
-                      <option value="wherehous">WareHouse</option>
+                      <option value="wherehouse">WareHouse</option>
                       <option value="user">User</option>
 
                     </select>
