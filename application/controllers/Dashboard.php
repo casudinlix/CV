@@ -31,7 +31,7 @@ public function setting_users()
   $data['namaku']=$this->session->userdata('nama');
   $data['user']=$this->db->get('users')->result();
 
-$data['m']=$this->session->flashdata('m');
+
   $this->load->view('users/dashboard',$data);
   $this->load->view('users/modul/administrator/setting/user',$data);
   $this->load->view('users/bawah',$data);
@@ -47,10 +47,16 @@ public function add_user()
   $this->load->view('users/modul/administrator/setting/add_user',$data);
   $this->load->view('users/bawah',$data);
 }
-public function hapus($d)
+public function edit_user()
 {
-$r=  $this->db->get('users', $d);
-  json_encode($r);
-  # code...
+$id=$this->uri->segment(3);
+
+$data['user']=$this->db->get_where('users',array('username'=>$id))->row_array();
+$data['title']='Rumah Kreasi';
+$data['namaku']=$this->session->userdata('nama');
+$this->load->view('users/dashboard',$data);
+$this->load->view('users/modul/administrator/setting/edit_user',$data);
+$this->load->view('users/bawah',$data);
+
 }
 }

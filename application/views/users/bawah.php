@@ -60,17 +60,12 @@
         });
         </script>
         <!--Untuk sweetalert-->
-<?php if ($m): ?>
+<?php if ($this->session->set_flashdata('m','value')): ?>
   <script type="text/javascript">
   swal("Good job!", "Data Has Ben Saved!", "success")
   </script>
 <?php endif; ?>
 
-<?php if ($this->session->set_flashdata('hapus', 'value')): ?>
-  <script type="text/javascript">
-    swal("User Deleted!", "You clicked the button!", "success")
-  </script>
-<?php endif; ?>
 
 <script type="text/javascript">
 function confirmDelete2($d) {
@@ -101,7 +96,7 @@ showLoaderOnConfirm: true
               setTimeout(function () {
                   swal(" request finished!");
                   window.location.reload();
-        }, 2000);
+        }, 4000);
 
 
           },
