@@ -11,6 +11,26 @@ class Login extends CI_Controller{
 
   function index()
   {
+    if($this->session->userdata('role') == 'super-user')
+			{
+				redirect('dashboard');
+			}
+			elseif($this->session->userdata('role') == 'finance')
+			{
+				redirect('user');
+			}
+			elseif($this->session->userdata('role') == 'user')
+
+			{
+				redirect('user');
+			}
+			elseif($this->session->userdata('role') == 'warehouse')
+
+			{
+				redirect('user');
+			}
+
+    
     $this->load->view('login');
   }
 

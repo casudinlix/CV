@@ -11,7 +11,7 @@ class Cikarang extends CI_Controller{
 
   function index()
   {
-     $a=$this->session->all_userdata();
+     $a=$this->session->userdata('wh1');
      var_dump($a);
 
   }
