@@ -60,7 +60,7 @@
         });
         </script>
         <!--Untuk sweetalert-->
-<?php if ($this->session->set_flashdata('m','value')): ?>
+<?php if ($this->session->flashdata('m','value')): ?>
   <script type="text/javascript">
   swal("Good job!", "Data Has Ben Saved!", "success")
   </script>

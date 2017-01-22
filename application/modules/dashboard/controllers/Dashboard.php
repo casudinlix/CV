@@ -18,11 +18,13 @@ class Dashboard extends CI_Controller{
 
       $data['title']='Rumah Kreasi';
       $data['namaku']=$this->session->userdata('nama');
+      $data['akses']=$this->session->userdata('wh');
 
-      $this->load->view('users/dashboard',$data);
-      $this->load->view('users/modul/depan',$data);
+         
+      $this->load->view('dashboard',$data);
+      $this->load->view('modul/depan',$data);
 
-      $this->load->view('users/bawah',$data);
+      $this->load->view('bawah',$data);
       # code...
     }
 public function setting_users()
@@ -58,5 +60,9 @@ $this->load->view('users/dashboard',$data);
 $this->load->view('users/modul/administrator/setting/edit_user',$data);
 $this->load->view('users/bawah',$data);
 
+}
+public function FunctionName($value='')
+{
+  # code...
 }
 }

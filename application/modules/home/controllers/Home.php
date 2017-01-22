@@ -40,7 +40,8 @@ class Home extends CI_Controller {
 			{
 				redirect('user');
 			}
-                        $data=$this->load->view('login');
+
+   redirect('login','refresh');
 		}
 
 
@@ -62,16 +63,18 @@ class Home extends CI_Controller {
   	}else{
 		$nip = $this->input->post('username');
 		$pass = base64_encode($this->input->post('pass'));
-		$cek = $this->login->cek($nip, $pass);
+
+
+		$cek = $this->m_login->cek($nip, $pass);
+
 		if($cek->num_rows() == 1)
 		{
 			foreach($cek->result() as $data){
 				$sess_data['id'] = $data->id_a;
 				$sess_data['username'] = $data->username;
 				$sess_data['nama'] = $data->realname;
-				//$sess_data['foto'] = $data->foto;
+				$sess_data['wh'] = $data->id_b;
 				$sess_data['role'] = $data->role;
-        
 				$this->session->set_userdata($sess_data);
 
 			}
@@ -91,13 +94,19 @@ class Home extends CI_Controller {
 
   }
 	$this->session->set_flashdata('gagal', 'value');
-	    redirect('home');
+	    redirect('login');
 }
 
 }
 	function keluar()
 	{
+			$id=$this->session->userdata('id');
+			$data=array('warehouse'=>'Null');
+			$this->db->where('id_a', $id);
+			$this->db->update('users', $data);
+
 		$this->session->sess_destroy();
-		redirect('home');
+
+		redirect('login');
 	}
 	}
