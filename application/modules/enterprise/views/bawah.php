@@ -1,5 +1,4 @@
 
-        <!-- footer content -->
 
       </div>
     </div>
@@ -34,6 +33,8 @@
         <script src="<?php echo duddin();?>jszip/dist/jszip.min.js"></script>
         <script src="<?php echo duddin();?>pdfmake/build/pdfmake.min.js"></script>
         <script src="<?php echo duddin();?>pdfmake/build/vfs_fonts.js"></script>
+        <script src="<?php echo duddin();?>switchery/dist/switchery.min.js"></script>
+          <script src="<?php echo duddin();?>iCheck/icheck.min.js"></script>
         <!-- Select2 -->
         <script src="<?php echo duddin();?>select2/dist/js/select2.full.min.js"></script>
         <script type="text/javascript">
@@ -60,18 +61,13 @@
   </script>
 <?php endif; ?>
 
-<?php if ($this->session->flashdata('gudang','value')): ?>
-  <script type="text/javascript">
-    swal("Not Allowed!", "Chose Warehouse ")
-  </script>
-<?php endif; ?>
 
 <script type="text/javascript">
 function confirmDelete2($d) {
 var id = $d;
   swal({
 title: "Are you sure?",
-text: "You will not be able to recover this imaginary file!",
+text: "You will not be able to recover this User!",
 type: "warning",
 showCancelButton: true,
 closeOnConfirm: false,

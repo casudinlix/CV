@@ -12,8 +12,9 @@ class Warehouse extends CI_Controller{
   function index()
   {
 
+	redirect($wh);
   }
-public function cikarang($value='')
+public function cikarang()
 {
 
 $wh=$this->uri->segment(2);
@@ -34,17 +35,12 @@ if($cek->num_rows() == 1)
     $sess_data['wh1'] = $data->warehouse;
     $sess_data['role'] = $data->role;
     $this->session->set_userdata($sess_data);
-
   }
+  redirect(strtolower($wh));
 }
 
-
-  redirect(strtolower($wh),'refresh');
-
-
-
 }
-public function jakarta($value='')
+public function jakarta()
 {
 
   $wh=$this->uri->segment(2);
@@ -53,11 +49,26 @@ public function jakarta($value='')
   $data=array('warehouse'=>$wh,'ip'=>$ip);
   $this->db->where('id_a', $id);
   $this->db->update('users', $data);
+  $cek = $this->m_login->wh($wh);
 
-  $this->session->set_userdata($wh);
-    redirect(strtolower($wh),'refresh');
+  if($cek->num_rows() == 1)
+  {
+    foreach($cek->result() as $data){
+      $sess_data['id'] = $data->id_a;
+      $sess_data['username'] = $data->username;
+      $sess_data['nama'] = $data->realname;
+      $sess_data['wh'] = $data->id_b;
+      $sess_data['wh1'] = $data->warehouse;
+      $sess_data['role'] = $data->role;
+      $this->session->set_userdata($sess_data);
+
+    }
+    redirect(strtolower($wh));
+  }
+
+
 }
-public function bandung($value='')
+public function Enterprise()
 {
 
   $wh=$this->uri->segment(2);
@@ -66,21 +77,33 @@ public function bandung($value='')
   $data=array('warehouse'=>$wh,'ip'=>$ip);
   $this->db->where('id_a', $id);
   $this->db->update('users', $data);
+  $cek = $this->m_login->wh($wh);
 
-  $this->session->set_userdata($wh);
-    redirect(strtolower($wh),'refresh');
+  if($cek->num_rows() == 1)
+  {
+    foreach($cek->result() as $data){
+      $sess_data['id'] = $data->id_a;
+      $sess_data['username'] = $data->username;
+      $sess_data['nama'] = $data->realname;
+      $sess_data['wh'] = $data->id_b;
+      $sess_data['wh1'] = $data->warehouse;
+      $sess_data['role'] = $data->role;
+      $this->session->set_userdata($sess_data);
+
+    }
+    redirect(strtolower($wh));
+  }
+
+
 }
-public function Enterprise($value='')
+public function pilih()
 {
-
-  $wh=$this->uri->segment(2);
   $id=$this->session->userdata('id');
-  $ip=$this->input->ip_address();
-  $data=array('warehouse'=>$wh,'ip'=>$ip);
+  $data=array('warehouse'=>'Null');
   $this->db->where('id_a', $id);
   $this->db->update('users', $data);
-
-  $this->session->set_userdata($wh);
-    redirect(strtolower($wh),'refresh');
+  redirect('dashboard');
+  # code...
 }
+
 }

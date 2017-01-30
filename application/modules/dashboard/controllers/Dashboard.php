@@ -19,11 +19,8 @@ class Dashboard extends CI_Controller{
       $data['title']='Rumah Kreasi';
       $data['namaku']=$this->session->userdata('nama');
       $data['akses']=$this->session->userdata('wh');
-
-         
       $this->load->view('dashboard',$data);
       $this->load->view('modul/depan',$data);
-
       $this->load->view('bawah',$data);
       # code...
     }
