@@ -25,7 +25,7 @@ public function save_user()
    $gudang= implode(',',$this->input->post('wh'));
    $pass=base64_encode($this->input->post('pass'));
    $role=$this->input->post('role');
- $data=array('username'=>$username,'realname'=>$nama,'pass'=>$pass,'role'=>$role,'id_b'=>$gudang);
+ $data=array('username'=>$username,'realname'=>$nama,'pass'=>$pass,'role'=>$role,'whid'=>$gudang);
 
    $r=$this->db->insert('users', $data);
    if ($r==TRUE) {
@@ -46,7 +46,7 @@ public function edit_user( )
   $pass=base64_encode($this->input->post('pass'));
   $gudang= implode(',',$this->input->post('wh'));
   $role=$this->input->post('role');
-  $data=array('realname'=>$nama,'pass'=>$pass,'role'=>$role,'id_b'=>$gudang);
+  $data=array('realname'=>$nama,'pass'=>$pass,'role'=>$role,'whid'=>$gudang);
   $this->db->where('username',$id);
 
   $r=$this->db->update('users',$data);

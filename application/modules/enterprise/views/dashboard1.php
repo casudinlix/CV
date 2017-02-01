@@ -67,7 +67,7 @@
                   <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
    <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/user')?>">Users<span class="fa fa-users"></span></a></li>
-
+<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/item')?>">Item<span class="fa fa-cubes"></span></a></li>
                     </ul>
                     </li>
 
@@ -180,10 +180,10 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
+<span class="fa fa-building-o"></span><?php echo $this->session->userdata('wh1'); ?>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+ <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <span class="fa fa-users"></span><?php echo $namaku; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>

@@ -14,11 +14,16 @@ class Dashboard extends CI_Controller{
 
   function index()
   {
-
+ 
 
       $data['title']='Rumah Kreasi';
       $data['namaku']=$this->session->userdata('nama');
+      $id=$this->session->userdata('id');
+      $whid=
+    //$this->db->select('whid');
+
       $data['akses']=$this->session->userdata('wh');
+      $this->db->get_where('users',array('id_a'=>$id,'whid'=>$whid))->row();
       $this->load->view('dashboard',$data);
       $this->load->view('modul/depan',$data);
       $this->load->view('bawah',$data);

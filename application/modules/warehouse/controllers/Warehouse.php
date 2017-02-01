@@ -31,8 +31,8 @@ if($cek->num_rows() == 1)
     $sess_data['id'] = $data->id_a;
     $sess_data['username'] = $data->username;
     $sess_data['nama'] = $data->realname;
-    $sess_data['wh'] = $data->id_b;
-    $sess_data['wh1'] = $data->warehouse;
+
+    $sess_data['wh1'] = $data->whid;
     $sess_data['role'] = $data->role;
     $this->session->set_userdata($sess_data);
   }
@@ -57,8 +57,8 @@ public function jakarta()
       $sess_data['id'] = $data->id_a;
       $sess_data['username'] = $data->username;
       $sess_data['nama'] = $data->realname;
-      $sess_data['wh'] = $data->id_b;
-      $sess_data['wh1'] = $data->warehouse;
+
+      $sess_data['wh1'] = $data->whid;
       $sess_data['role'] = $data->role;
       $this->session->set_userdata($sess_data);
 
@@ -85,7 +85,6 @@ public function Enterprise()
       $sess_data['id'] = $data->id_a;
       $sess_data['username'] = $data->username;
       $sess_data['nama'] = $data->realname;
-      $sess_data['wh'] = $data->id_b;
       $sess_data['wh1'] = $data->warehouse;
       $sess_data['role'] = $data->role;
       $this->session->set_userdata($sess_data);

@@ -58,7 +58,7 @@
                   <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Warehouse</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="checkbox">
-                      <?php foreach (explode(',',$user['id_b']) as $key): ?>
+                      <?php foreach (explode(',',$user['whid']) as $key): ?>
                         <label>
  <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key ?>" checked="checked"><?php echo $key ?>
                         </label>

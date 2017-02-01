@@ -60,9 +60,9 @@ array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
   // require( 'ssp.class.php' );
   //require('inventory/produk/ssp.customized.class.php' );
   $joinQuery = "FROM `users` AS `u`";
-  $extraWhere = "`u`.`role` != 'super-user' ";
+  //$extraWhere = "`u`.`role` != 'super-user' ";
   echo json_encode(
-  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery,$extraWhere)
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
   );
 
 }
@@ -74,6 +74,54 @@ $this->db->where('username',$id);
 $query=$this->db->delete('users');
 
   # code...
+}
+public function item()
+{
+//  $data='dd';
+  $table = 'm_produk';
+  // Table's primary key
+  $primaryKey = 'kd_produk';
+  $columns = array(
+    array( 'db' => '`u`.`kd_produk`', 'dt' => 0, 'field' => 'kd_produk' ),
+    array( 'db' => 'nama_produk', 'dt' => 1, 'field' => 'nama_produk' ),
+    array( 'db' => '`u`.`jenis`', 'dt' => 2, 'field' => 'jenis' ),
+    array( 'db' => 'update_user',  'dt' => 3, 'field' => 'update_user' ),
+    array( 'db' => 'last',   'dt' => 4, 'field' => 'last','formater' =>function($e){
+      return date($e);
+      }),
+//array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
+
+
+    array('db' => '`u`.`kd_produk`', 'dt' => 5, 'field' => 'kd_produk', 'formatter' => function( $d ) {
+
+
+          return '<a href="'. site_url('enterprise/edit_item/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a> <a onclick=\'confirmDelete2("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i>Delete</a>';
+      })
+);
+
+//$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+  	'user' => $this->db->username,
+  	'pass' => $this->db->password,
+  	'db'   => $this->db->database,
+  	'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `m_produk` AS `u`";
+  //$extraWhere = "`u`.`role` != 'super-user' ";
+  echo json_encode(
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  );
+
 }
 
 }

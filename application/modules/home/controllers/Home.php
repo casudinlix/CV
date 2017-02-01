@@ -41,7 +41,7 @@ class Home extends CI_Controller {
 				redirect('user');
 			}
 
-   redirect('login','refresh');
+   redirect('login');
 		}
 
 
@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 				$sess_data['id'] = $data->id_a;
 				$sess_data['username'] = $data->username;
 				$sess_data['nama'] = $data->realname;
-				$sess_data['wh'] = $data->id_b;
+				$sess_data['wh'] = $data->whid;
 				$sess_data['role'] = $data->role;
 				$this->session->set_userdata($sess_data);
 

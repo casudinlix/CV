@@ -173,11 +173,20 @@ showLoaderOnConfirm: true
          keys: true,
          "processing": true,
          "serverSide": true,
-
+          responsive: true,
         fixedHeader: true,
         "serverSide": true,
         "ajax": "<?php echo site_url('ajax/users'); ?>"
       });
+      $('#item').dataTable({
+        keys: true,
+        "processing": true,
+        "serverSide": true,
+         responsive: true,
+       fixedHeader: true,
+       "serverSide": true,
+       "ajax": "<?php echo site_url('ajax/item'); ?>"
+     });
 
 
        $('#datatable-keytable').DataTable({

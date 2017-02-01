@@ -68,11 +68,27 @@ $data['whe']=$this->session->userdata('wh1');
     $data['title']='Rumah Kreasi';
     $data['namaku']=$this->session->userdata('nama');
     $data['user']=$this->db->get('users')->result();
-$data['whe']=$this->session->userdata('wh1');
+    $data['whe']=$this->session->userdata('wh1');
     $this->load->view('dashboard1',$data);
     $this->load->view('add_user',$data);
     $this->load->view('bawah',$data);
     # code...
+
   }
+ public function item($value='')
+{
+
+
+
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['user']=$this->db->get('users')->result();
+  $data['whe']=$this->session->userdata('wh1');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('item/item',$data);
+  $this->load->view('bawah',$data);
+
+}
+
 
 }
