@@ -89,6 +89,34 @@ $data['whe']=$this->session->userdata('wh1');
   $this->load->view('bawah',$data);
 
 }
+public function add_item($value='')
+{
+  $this->load->model('m_produk');
+  $data['kode']=$this->m_produk->kode_item();
+  $data['jenis']=$this->db->get('m_jenis')->result();
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['user']=$this->db->get('users')->result();
+  $data['whe']=$this->session->userdata('wh1');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('item/add_item',$data);
+  $this->load->view('bawah',$data);
+  # code...
+}
+public function edit_item()
+{
+  $id=$this->uri->segment(3);
+  $data['whe']=$this->session->userdata('wh1');
+  $data['user']=$this->db->get_where('m_produk',array('kd_produk'=>$id))->row_array();
+  $data['title']='Rumah Kreasi';
+    $data['jenis']=$this->db->get('m_jenis')->result();
+  $data['namaku']=$this->session->userdata('nama');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('item/edit_item',$data);
+  $this->load->view('bawah',$data);
+
+  # code...
+}
 
 
 }

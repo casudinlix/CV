@@ -60,7 +60,16 @@
   swal("Good job!", "Data Has Ben Saved!", "success")
   </script>
 <?php endif; ?>
-
+<?php if ($this->session->flashdata('item','value')): ?>
+  <script type="text/javascript">
+  swal("Good job!", "Data Has Ben Saved!", "success")
+  </script>
+<?php endif; ?>
+<?php if ($this->session->flashdata('edit_item','value')): ?>
+  <script type="text/javascript">
+  swal("Item Updated !")
+  </script>
+<?php endif; ?>
 
 <script type="text/javascript">
 function confirmDelete2($d) {
@@ -105,6 +114,49 @@ showLoaderOnConfirm: true
 }
 
 </script>
+<script type="text/javascript">
+function confirmDelete2($d) {
+var id = $d;
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this Item!",
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
+
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/delet_item/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error deleting!", "Please try again", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
 
 <!--Untuk sweetalert-->
 
@@ -116,6 +168,10 @@ showLoaderOnConfirm: true
               placeholder: "Select a Role",
               allowClear: true
             });
+            $(".jenis").select2({
+              placeholder: "Select a Type",
+              allowClear: true
+            });
             $(".select2_group").select2({});
             $(".select2_multiple").select2({
               maximumSelectionLength: 4,
@@ -124,6 +180,7 @@ showLoaderOnConfirm: true
             });
           });
         </script>
+
         <!-- /Select2 -->
 <!--Untuk Scrip data tables !-->
 <!-- Datatables -->

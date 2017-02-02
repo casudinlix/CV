@@ -18,5 +18,16 @@ class M_produk extends CI_Model{
     return $this->db->get('m_jenis')->result();
     # code...
   }
+  public function kode_item()
+  {
+    $create = strtoupper(uniqid(rand(),true));
+    //$s='SB.';
+    $d=date('Y');
+    $b=date('m');
+    $h=date('d');
+    $style = $b.$h.substr($create,0,3);
+    return $style;
+    # code...
+  }
 
 }

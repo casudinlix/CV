@@ -123,5 +123,14 @@ public function item()
   );
 
 }
+public function delet_item($d)
+{
+//$id=$this->input->GET('id');
+$id=$this->uri->segment(3);
+$this->db->where('kd_produk',$id);
+$query=$this->db->delete('m_produk');
+
+  # code...
+}
 
 }

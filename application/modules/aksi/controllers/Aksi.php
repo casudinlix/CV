@@ -57,5 +57,36 @@ public function edit_user( )
 }
 
 }
+public function save_item()
+{
+  $code=$this->input->post('code');
+  $name=strtoupper($this->input->post('nama'));
+  $user=$this->session->userdata('nama');
+  $jenis=$this->input->post('jenis');
+  $date=date("Y-m-d");
+  $data=array('kd_produk'=>$code,'nama_produk'=>$name,'jenis'=>$jenis,'update_user'=>$user,'last'=>$date);
+  $this->db->insert('m_produk',$data);
+$this->session->set_flashdata('item', 'value');
+redirect('enterprise/item');
+  # code...
+}
+public function edit_item()
+{
+    $id=$this->input->post('id');
+$nama=$this->input->post('nama');
+$jenis=$this->input->post('jenis');
+$user=$this->session->userdata('nama');
+$date=date("Y-m-d");
+$data=array('nama_produk'=>$nama,'jenis'=>$jenis,'update_user'=>$user,'last'=>$date);
+  $this->db->where('kd_produk',$id);
+
+  $r=$this->db->update('m_produk',$data);
+  if ($r==TRUE) {
+  $this->session->set_flashdata('edit_item','value');
+  $q=$this->session->userdata('wh1');
+  redirect(strtolower($q).'/item');
+}
+
+}
 
 }

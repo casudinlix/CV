@@ -8,7 +8,7 @@
                  <div class="x_title">
                   <div>
 
-                   <a href="<?php echo site_url(strtolower($whe).'/add_user')?>" class="btn btn-success"><i class="fa fa-plus-square">Add Items</i></a></div>
+                   <a href="<?php echo site_url(strtolower($whe).'/add_item')?>" class="btn btn-success"><i class="fa fa-plus-square">Add Items</i></a></div>
                    <h2>List<small>Items</small></h2>
 
                    <ul class="nav navbar-right panel_toolbox">
@@ -25,7 +25,7 @@
                        <tr>
 
                          <th>Product Code</th>
-                         <th>product Name</th>
+                         <th>Product Name</th>
                          <th>Product Type</th>
 <th>Update By</th>
 <th>Last Update</th>
