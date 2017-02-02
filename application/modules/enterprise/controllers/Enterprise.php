@@ -117,6 +117,30 @@ public function edit_item()
 
   # code...
 }
+public function price()
+{
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['user']=$this->db->get('users')->result();
+  $data['whe']=$this->session->userdata('wh1');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('price/price',$data);
+  $this->load->view('bawah',$data);
 
+  # code...
+}
+public function edit_price($value='')
+{
+  $id=$this->uri->segment(3);
+  $data['whe']=$this->session->userdata('wh1');
+  $data['user']=$this->db->get_where('m_produk',array('kd_produk'=>$id))->row_array();
+  $data['title']='Rumah Kreasi';
+    $data['jenis']=$this->db->get('m_jenis')->result();
+  $data['namaku']=$this->session->userdata('nama');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('price/edit_price',$data);
+  $this->load->view('bawah',$data);
+  # code...
+}
 
 }

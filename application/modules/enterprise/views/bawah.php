@@ -70,6 +70,12 @@
   swal("Item Updated !")
   </script>
 <?php endif; ?>
+<?php if ($this->session->flashdata('edit_price','value')): ?>
+  <script type="text/javascript">
+  swal("Price Updated !")
+  </script>
+<?php endif; ?>
+
 
 <script type="text/javascript">
 function confirmDelete2($d) {
@@ -244,7 +250,15 @@ showLoaderOnConfirm: true
        "serverSide": true,
        "ajax": "<?php echo site_url('ajax/item'); ?>"
      });
-
+     $('#price').dataTable({
+       keys: true,
+       "processing": true,
+       "serverSide": true,
+        responsive: true,
+      fixedHeader: true,
+      "serverSide": true,
+      "ajax": "<?php echo site_url('ajax/price'); ?>"
+     });
 
        $('#datatable-keytable').DataTable({
          keys: true

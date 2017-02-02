@@ -88,5 +88,25 @@ $data=array('nama_produk'=>$nama,'jenis'=>$jenis,'update_user'=>$user,'last'=>$d
 }
 
 }
+public function edit_price()
+{
+  $id=$this->input->post('id');
+$nama=$this->input->post('nama');
+$hargabeli=$this->input->post('hargabeli');
+$hargajual=$this->input->post('hargajual');
+$user=$this->session->userdata('nama');
+$date=date("Y-m-d");
+$data=array('nama_produk'=>$nama,'harga_beli'=>$hargabeli,'harga_jual'=>$hargajual,'last'=>$date);
+$this->db->where('kd_produk',$id);
+
+$r=$this->db->update('m_produk',$data);
+if ($r==TRUE) {
+$this->session->set_flashdata('edit_price','value');
+$q=$this->session->userdata('wh1');
+redirect(strtolower($q).'/price');
+}
+
+  # code...
+}
 
 }

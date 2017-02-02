@@ -68,6 +68,7 @@
                     <ul class="nav child_menu">
    <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/user')?>">Users<span class="fa fa-users"></span></a></li>
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/item')?>">Item<span class="fa fa-cubes"></span></a></li>
+<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/price')?>">Price<span class="fa fa-money"></span></a></li>
                     </ul>
                     </li>
 
