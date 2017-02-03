@@ -108,5 +108,35 @@ redirect(strtolower($q).'/price');
 
   # code...
 }
+public function save_location($value='')
+{
+  $loc=$this->input->post('loc');
+  $name=strtoupper($this->input->post('nama'));
+  $user=$this->session->userdata('nama');
+
+  $date=date("Y-m-d");
+  $data=array('lokasi'=>$loc,'nama_lokasi'=>$name,'update_user'=>$user,'last'=>$date);
+  $this->db->insert('m_lokasi',$data);
+$this->session->set_flashdata('location', 'value');
+redirect('enterprise/location');
+  # code...
+}
+public function edit_location($value='')
+{
+  $id=$this->input->post('id');
+$nama=$this->input->post('nama');
+$user=$this->session->userdata('nama');
+$date=date("Y-m-d");
+$data=array('nama_lokasi'=>$nama,'update_user'=>$user,'last'=>$date);
+$this->db->where('lokasi',$id);
+
+$r=$this->db->update('m_lokasi',$data);
+if ($r==TRUE) {
+$this->session->set_flashdata('edit_location','value');
+$q=$this->session->userdata('wh1');
+redirect(strtolower($q).'/location');
+}
+  # code...
+}
 
 }

@@ -142,5 +142,39 @@ public function edit_price($value='')
   $this->load->view('bawah',$data);
   # code...
 }
+public function location($value='')
+{
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['user']=$this->db->get('users')->result();
+  $data['whe']=$this->session->userdata('wh1');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('location/location',$data);
+  $this->load->view('bawah',$data);
 
+  # code...
+}
+public function add_location($value='')
+{
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['user']=$this->db->get('users')->result();
+  $data['whe']=$this->session->userdata('wh1');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('location/add_location',$data);
+  $this->load->view('bawah',$data);
+  # code...
+}
+public function edit_location($value='')
+{
+  $id=$this->uri->segment(3);
+  $data['whe']=$this->session->userdata('wh1');
+  $data['user']=$this->db->get_where('m_lokasi',array('lokasi'=>$id))->row_array();
+  $data['title']='Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('location/edit_location',$data);
+  $this->load->view('bawah',$data);
+  # code...
+}
 }

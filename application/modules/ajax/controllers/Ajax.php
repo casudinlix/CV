@@ -182,5 +182,61 @@ public function price($value='')
   );
   # code...
 }
+public function location()
+{
+  $table = 'm_lokasi';
+  // Table's primary key
+  $primaryKey = 'lokasi';
+  $columns = array(
+    array( 'db' => '`u`.`lokasi`', 'dt' => 0, 'field' => 'lokasi' ),
+    array( 'db' => 'nama_lokasi', 'dt' => 1, 'field' => 'nama_lokasi' ),
+    array( 'db' => '`u`.`update_user`', 'dt' => 2, 'field' => 'update_user' ),
+    //array( 'db' => 'last',  'dt' => 3, 'field' => 'last'),
+    //array( 'db' => 'harga_jual',  'dt' => 4, 'field' => 'harga_jual' ),
+    array( 'db' => 'last',   'dt' => 3, 'field' => 'last','formater' =>function($e){
+      return date($e);
+      }),
+//array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
 
+
+    array('db' => '`u`.`lokasi`', 'dt' => 4, 'field' => 'lokasi', 'formatter' => function( $d ) {
+
+
+          return '<a href="'. site_url('enterprise/edit_location/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a> <a onclick=\'lokasi("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i>Delete</a>';
+      })
+);
+
+//$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+  	'user' => $this->db->username,
+  	'pass' => $this->db->password,
+  	'db'   => $this->db->database,
+  	'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `m_lokasi` AS `u`";
+  //$extraWhere = "`u`.`role` != 'super-user' ";
+  echo json_encode(
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  );
+  # code...
+}
+public function delet_location($d)
+{
+//$id=$this->input->GET('id');
+$id=$this->uri->segment(3);
+$this->db->where('lokasi',$id);
+$query=$this->db->delete('m_lokasi');
+
+  # code...
+}
 }
