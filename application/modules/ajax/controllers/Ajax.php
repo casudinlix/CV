@@ -60,9 +60,9 @@ array( 'db' => '`u`.`role`', 'dt' => 2, 'field' => 'role' ),
   // require( 'ssp.class.php' );
   //require('inventory/produk/ssp.customized.class.php' );
   $joinQuery = "FROM `users` AS `u`";
-  //$extraWhere = "`u`.`role` != 'super-user' ";
+  $extraWhere = "`u`.`role` != 'super-user' ";
   echo json_encode(
-  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery,$extraWhere)
   );
 
 }
@@ -237,6 +237,45 @@ $id=$this->uri->segment(3);
 $this->db->where('lokasi',$id);
 $query=$this->db->delete('m_lokasi');
 
+  # code...
+}
+public function cikarang()
+{
+  $table = 'join_stock';
+  // Table's primary key
+  $primaryKey = 'lpn';
+  $columns = array(
+    array( 'db' => '`u`.`lpn`', 'dt' => 0, 'field' => 'lpn' ),
+    //array( 'db' => 'username', 'dt' => 0, 'field' => 'username' ),
+array( 'db' => '`u`.`kd_produk`', 'dt' => 1, 'field' => 'kd_produk' ),
+    array( 'db' => 'nama_produk',  'dt' => 2, 'field' => 'nama_produk' ),
+    array( 'db' => 'qty',   'dt' => 3, 'field' => 'qty' ),
+array( 'db' => '`u`.`lokasi`', 'dt' => 4, 'field' => 'lokasi' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
+
+);
+
+//$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+  	'user' => $this->db->username,
+  	'pass' => $this->db->password,
+  	'db'   => $this->db->database,
+  	'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `join_stock` AS `u`";
+ $extraWhere = "`u`.`whid` = 'Cikarang' ";
+  echo json_encode(
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery,$extraWhere)
+  );
   # code...
 }
 }

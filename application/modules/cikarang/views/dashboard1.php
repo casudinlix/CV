@@ -64,19 +64,10 @@
                   <li><a href="<?php echo site_url('warehouse/pilih')?>"><i class="fa fa-home"></i> Home</a>
 
                   </li>
-                  <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-   <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/user')?>">Users<span class="fa fa-users"></span></a></li>
-<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/item')?>">Item<span class="fa fa-cubes"></span></a></li>
-<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/price')?>">Price<span class="fa fa-money"></span></a></li>
-<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/location')?>">Location<span class="fa fa-location-arrow"></span></a></li>
-                    </ul>
-                    </li>
 
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i> Report Master<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
+   <li><a href="<?php echo site_url(strtolower($wh2).'/product_master')?>">Product Master</a></li>
                       <li><a href="media_gallery.html">Media Gallery</a></li>
                       <li><a href="typography.html">Typography</a></li>
                       <li><a href="icons.html">Icons</a></li>
@@ -182,7 +173,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-<span class="fa fa-building-o"></span><?php echo $this->session->userdata('wh1'); ?>
+<span class="fa fa-building-o"></span><?php echo $this->session->userdata('pilih'); ?>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

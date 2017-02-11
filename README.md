@@ -1,2 +1,2 @@
 # CV
-Aplikasi Internal
+Aplikasi Inventory Internal

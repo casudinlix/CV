@@ -8,8 +8,8 @@
                  <div class="x_title">
                   <div>
 
-                   <a href="<?php echo site_url(strtolower($whe).'/add_item')?>" class="btn btn-success"><i class="fa fa-plus-square">Add Items</i></a></div>
-                   <h2>List<small>Items</small></h2>
+
+                   <h2>List<small>Product</small></h2>
 
                    <ul class="nav navbar-right panel_toolbox">
                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -20,17 +20,16 @@
                  </div>
                  <div class="x_content">
 
- <table id="price"  class="table table-striped table-bordered dt-responsive nowrap">
+ <table id="produk"  class="table table-striped table-bordered dt-responsive nowrap">
                      <thead>
                        <tr>
 
+                         <th>LPN</th>
                          <th>Product Code</th>
-                         <th>Product Name</th>
-                         <th>Product Type</th>
-                         <th>Purchase Price</th>
-                         <th>Selling Price</th>
-                         <th>Last Update</th>
-                         <th>Action</th>
+                         <th>Produk Name</th>
+
+                         <th>QTY</th>
+                         <th>Location</th>
                        </tr>
                      </thead>
 
