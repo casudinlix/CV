@@ -31,6 +31,15 @@
 
     <link href="<?php echo duddin();?>switchery/dist/switchery.min.css" rel="stylesheet">
     <link href="<?php echo duddin();?>iCheck/skins/flat/green.css" rel="stylesheet">
+    <script>
+		function hanyaAngka(evt) {
+		  var charCode = (evt.which) ? evt.which : event.keyCode
+		   if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+		    return false;
+		  return true;
+		}
+	</script>
   </head>
 
   <body class="nav-md">
@@ -61,15 +70,19 @@
               <div class="menu_section">
 
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('warehouse/pilih')?>"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="<?php echo site_url('warehouse/pilih')?>"><i class="fa fa-home"></i> SELECT WH</a>
 
                   </li>
                   <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-   <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/user')?>">Users<span class="fa fa-users"></span></a></li>
+   <li><i></i><a href="<?php echo site_url($this->uri->segment(1).'/user')?>">Users<span class="fa fa-users"></span></a></li>
+
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/item')?>">Item<span class="fa fa-cubes"></span></a></li>
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/price')?>">Price<span class="fa fa-money"></span></a></li>
-<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/location')?>">Location<span class="fa fa-location-arrow"></span></a></li>
+<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/location')?>">Location<span class="fa fa-location-arrow"></span></a>
+  <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/vendor')?>">Vendor<span class="fa fa-truck"></span></a>
+
+</li>
                     </ul>
                     </li>
 

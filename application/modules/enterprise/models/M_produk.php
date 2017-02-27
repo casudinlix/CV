@@ -29,5 +29,14 @@ class M_produk extends CI_Model{
     return $style;
     # code...
   }
+  public function vendor()
+  {
+    $create = strtoupper(uniqid(rand(),true));
+    $s='VD.';
+
+    $style = $s.substr($create,0,3);
+    return $style;
+    # code...
+  }
 
 }

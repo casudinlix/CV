@@ -19,14 +19,15 @@
                    <div class="clearfix"></div>
                  </div>
                  <div class="x_content">
-
+<br>
  <table id="item"  class="table table-striped table-bordered dt-responsive nowrap">
                      <thead>
                        <tr>
 
                          <th>Product Code</th>
                          <th>Product Name</th>
-                         <th>Product Type</th>
+                         <th>Type</th>
+                         <th>Vendor</th>
 <th>Update By</th>
 <th>Last Update</th>
                          <th>Action</th>

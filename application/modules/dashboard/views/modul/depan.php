@@ -9,14 +9,18 @@
 
 
         ?>
-<select name="a" class="form-control" onChange="document.location =this.value">
-        <option value="">Select Your Distribution Center</option>
-        <?php foreach (explode(",",$akses) as $a): ?>
+        <form class="" action="<?php echo site_url('warehouse') ?>" method="post">
+          <select name="a" class="form-control" required="">
+                  <option value="">Select Your Distribution Center</option>
+                  <?php foreach (explode(",",$akses) as $a): ?>
 
-<option value="<?php echo site_url('warehouse/').$a?>"><?php echo $a ;?></option>
-        <?php endforeach; ?>
-</select>
- 
+          <option><?php echo $a ;?></option>
+                  <?php endforeach; ?>
+          </select>
+<input type='submit' class='form-control input-lg btn btn-info' placeholder='' value="Go!">
+
+        </form>
+
     </div>
   </div>
 </div>

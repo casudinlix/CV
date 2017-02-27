@@ -9,7 +9,7 @@
                   <div>
 
 
-                   <h2>List<small>Product</small></h2>
+                   <h2>Product<small>Master</small></h2>
 
                    <ul class="nav navbar-right panel_toolbox">
                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -18,7 +18,9 @@
                    </ul>
                    <div class="clearfix"></div>
                  </div>
+
                  <div class="x_content">
+                   <br>
 
  <table id="produk"  class="table table-striped table-bordered dt-responsive nowrap">
                      <thead>
@@ -29,6 +31,10 @@
                          <th>Produk Name</th>
 
                          <th>QTY</th>
+                         <th>Free</th>
+                         <th>Alocated</th>
+                         <th class='danger'>Hold</th>
+                         <th>Total</th>
                          <th>Location</th>
                        </tr>
                      </thead>

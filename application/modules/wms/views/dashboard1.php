@@ -18,6 +18,7 @@
     <!-- jQuery custom content scroller -->
     <link href="<?php echo duddin();?>malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 
+
     <!-- Custom Theme Style -->
     <link href="<?php echo duddin();?>build/css/custom.min.css" rel="stylesheet">
       <link href="<?php echo duddin();?>bootstrap-sweetalert-master/dist/sweetalert.css" rel="stylesheet">
@@ -31,6 +32,28 @@
 
     <link href="<?php echo duddin();?>switchery/dist/switchery.min.css" rel="stylesheet">
     <link href="<?php echo duddin();?>iCheck/skins/flat/green.css" rel="stylesheet">
+
+      <style>
+      #progressbar {
+        margin-top: 20px;
+      }
+
+      .progress-label {
+        font-weight: bold;
+        text-shadow: 1px 1px 0 #fff;
+      }
+
+      .ui-dialog-titlebar-close {
+        display: none;
+      }
+      </style>
+      <!-- jQuery Auto complete -->
+
+        <link rel="stylesheet" type="text/css" href="<?php echo duddin()?>auto/css/jquery-ui.min.css" />
+
+  <script src="<?php echo duddin()?>auto/js/jquery-3.1.1.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="<?php echo duddin()?>auto/css/lookupbox.css" />
   </head>
 
   <body class="nav-md">
@@ -61,13 +84,37 @@
               <div class="menu_section">
 
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('warehouse/pilih')?>"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="<?php echo site_url('warehouse/pilih')?>"><i class="fa fa-home"></i> Select WH</a>
 
                   </li>
-
-                  <li><a><i class="fa fa-desktop"></i> Report Master<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-reply"></i> Inbound<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-   <li><a href="<?php echo site_url(strtolower($wh2).'/product_master')?>">Product Master</a></li>
+                  <li><a href="<?php echo site_url('wms/po')?>">Purcahe Order</a></li>
+                      <li><a href="<?php echo site_url('wms/po')?>">ASN</a></li>
+                      <li><a href="typography.html">Typography</a></li>
+                      <li><a href="icons.html">Icons</a></li>
+                      <li><a href="glyphicons.html">Glyphicons</a></li>
+                      <li><a href="widgets.html">Widgets</a></li>
+                      <li><a href="invoice.html">Invoice</a></li>
+                      <li><a href="inbox.html">Inbox</a></li>
+                      <li><a href="calendar.html">Calendar</a></li>
+                    </ul>
+                  </li><li><a><i class="fa fa-external-link-square"></i> Outbound<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+   <li><a href="<?php echo site_url('wms/so')?>">Shipment Order</a></li>
+                      <li><a href="media_gallery.html">Media Gallery</a></li>
+                      <li><a href="typography.html">Typography</a></li>
+                      <li><a href="icons.html">Icons</a></li>
+                      <li><a href="glyphicons.html">Glyphicons</a></li>
+                      <li><a href="widgets.html">Widgets</a></li>
+                      <li><a href="invoice.html">Invoice</a></li>
+                      <li><a href="inbox.html">Inbox</a></li>
+                      <li><a href="calendar.html">Calendar</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Report Workbeach<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+   <li><a href="<?php echo site_url('wms/stock')?>">Product Master</a></li>
                       <li><a href="media_gallery.html">Media Gallery</a></li>
                       <li><a href="typography.html">Typography</a></li>
                       <li><a href="icons.html">Icons</a></li>
@@ -173,7 +220,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-<span class="fa fa-building-o"></span><?php echo $this->session->userdata('pilih'); ?>
+<span class="fa fa-building-o"></span><?php echo $whe; ?>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -189,6 +236,7 @@
                     </li>
 
                     <li><a href="<?php echo site_url('home/keluar') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo site_url('wms/me') ?>"><i class="fa fa-cog pull-right"></i> Settings</a></li>
                   </ul>
                 </li>
 

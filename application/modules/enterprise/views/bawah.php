@@ -85,11 +85,20 @@
   swal("Location Updated !")
   </script>
 <?php endif; ?>
-
+<?php if ($this->session->flashdata('vendor','value')): ?>
+  <script type="text/javascript">
+  swal("success !")
+  </script>
+<?php endif; ?>
+<?php if ($this->session->flashdata('vendor1','value')): ?>
+  <script type="text/javascript">
+  swal("success Updated!")
+  </script>
+<?php endif; ?>
 <!---akhir sweetalert-->
 
 <script type="text/javascript">
-function confirmDelete2($d) {
+function confirmDeleteuser($d) {
 var id = $d;
   swal({
 title: "Are you sure?",
@@ -175,6 +184,49 @@ showLoaderOnConfirm: true
 
 </script>
 <script type="text/javascript">
+function vendor($d) {
+var id = $d;
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this Vendor!" +id,
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
+
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/delete_vendor/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error deleting!", "Please try again", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
+<script type="text/javascript">
 function lokasi($d) {
 var id = $d;
   swal({
@@ -230,6 +282,10 @@ showLoaderOnConfirm: true
             });
             $(".jenis").select2({
               placeholder: "Select a Type",
+              allowClear: true
+            });
+            $(".vendor").select2({
+              placeholder: "Select a Vendor",
               allowClear: true
             });
             $(".select2_group").select2({});
@@ -295,6 +351,15 @@ showLoaderOnConfirm: true
         "serverSide": true,
         "ajax": "<?php echo site_url('ajax/users'); ?>"
       });
+      $('#vendor').dataTable({
+        keys: true,
+        "processing": true,
+        "serverSide": true,
+         responsive: true,
+       fixedHeader: true,
+       "serverSide": true,
+       "ajax": "<?php echo site_url('ajax/vendor'); ?>"
+     });
       $('#item').dataTable({
         keys: true,
         "processing": true,

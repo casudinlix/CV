@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Home extends CI_Controller {
+class Home extends MX_Controller {
 	function __construct(){
 		parent::__construct();
 
@@ -28,17 +28,17 @@ class Home extends CI_Controller {
 			}
 			elseif($this->session->userdata('role') == 'finance')
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 			elseif($this->session->userdata('role') == 'user')
 
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 			elseif($this->session->userdata('role') == 'warehouse')
 
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 
    redirect('login');
@@ -61,8 +61,8 @@ class Home extends CI_Controller {
   echo $s;
   die();
   	}else{
-		$nip = $this->input->post('username');
-		$pass = base64_encode($this->input->post('pass'));
+		$nip = $this->input->post('username',TRUE);
+		$pass = base64_encode($this->input->post('pass',TRUE));
 
 
 		$cek = $this->m_login->cek($nip, $pass);
@@ -70,10 +70,10 @@ class Home extends CI_Controller {
 		if($cek->num_rows() == 1)
 		{
 			foreach($cek->result() as $data){
-				$sess_data['id'] = $data->id_a;
-				$sess_data['username'] = $data->username;
+				$sess_data['login'] =TRUE;
+				$sess_data['nip'] = $data->nip;
 				$sess_data['nama'] = $data->realname;
-				$sess_data['wh'] = $data->whid;
+				$sess_data['wh'] =  $data->whid;
 				$sess_data['role'] = $data->role;
 				$this->session->set_userdata($sess_data);
 
@@ -100,11 +100,12 @@ class Home extends CI_Controller {
 }
 	function keluar()
 	{
-			$id=$this->session->userdata('id');
+			$id=$this->session->userdata('nip');
 			$data=array('warehouse'=>'Null');
-			$this->db->where('id_a', $id);
+			$this->db->where('nip', $id);
 			$this->db->update('users', $data);
-
+$semua=$this->session->all_userdata();
+$this->session->unset_userdata($semua);
 		$this->session->sess_destroy();
 
 		redirect('login');

@@ -1,106 +1,52 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Warehouse extends CI_Controller{
+class Warehouse extends MX_Controller{
 
-  public function __construct()
+   function __construct()
   {
     parent::__construct();
     //Codeigniter : Write Less Do More
+
   }
 
   function index()
   {
+    $wh=$this->input->post('a');
 
-	redirect($wh);
-  }
-public function cikarang()
-{
+    $id=$this->session->userdata('nip');
+    $ip=$this->input->ip_address();
+    $data=array('warehouse'=> $wh,'ip'=>$ip);
+    $this->db->where('nip', $id);
+    $this->db->update('users', $data);
+    $cek = $this->m_login->wh($wh);
+	   $sess_data['wh1'] = $wh;
+     $this->session->set_userdata($sess_data);
+     $wh=$this->session->userdata('wh1');
+     
+     if(!$wh)
+     {
+       $this->session->set_flashdata('gudang', 'value');
+       redirect('dashboard');
 
-$wh=$this->uri->segment(2);
-$id=$this->session->userdata('id');
-$ip=$this->input->ip_address();
-$data=array('warehouse'=>$wh,'ip'=>$ip);
-$this->db->where('id_a', $id);
-$this->db->update('users', $data);
-$cek = $this->m_login->wh($wh);
-
-if($cek->num_rows() == 1)
-{
-  foreach($cek->result() as $data){
-    $sess_data['id'] = $data->id_a;
-    $sess_data['username'] = $data->username;
-    $sess_data['nama'] = $data->realname;
-    $sess_data['pilih'] = $data->warehouse;
-    $sess_data['wh1'] = $data->whid;
-    $sess_data['role'] = $data->role;
-    $this->session->set_userdata($sess_data);
-  }
-  redirect(strtolower($wh));
-}
-
-}
-public function jakarta()
-{
-
-  $wh=$this->uri->segment(2);
-  $id=$this->session->userdata('id');
-  $ip=$this->input->ip_address();
-  $data=array('warehouse'=>$wh,'ip'=>$ip);
-  $this->db->where('id_a', $id);
-  $this->db->update('users', $data);
-  $cek = $this->m_login->wh($wh);
-
-  if($cek->num_rows() == 1)
-  {
-    foreach($cek->result() as $data){
-      $sess_data['id'] = $data->id_a;
-      $sess_data['username'] = $data->username;
-      $sess_data['nama'] = $data->realname;
-
-      $sess_data['wh1'] = $data->whid;
-      $sess_data['role'] = $data->role;
-      $this->session->set_userdata($sess_data);
-
-    }
-    redirect(strtolower($wh));
+       }
+     if ($wh=='Enterprise') {
+       $sess_data['wh1'] = $wh;
+       $this->session->set_userdata($sess_data);
+       redirect('enterprise');
+     }
+redirect('wms');
   }
 
 
-}
-public function Enterprise()
-{
-
-  $wh=$this->uri->segment(2);
-  $id=$this->session->userdata('id');
-  $ip=$this->input->ip_address();
-  $data=array('warehouse'=>$wh,'ip'=>$ip);
-  $this->db->where('id_a', $id);
-  $this->db->update('users', $data);
-  $cek = $this->m_login->wh($wh);
-
-  if($cek->num_rows() == 1)
-  {
-    foreach($cek->result() as $data){
-      $sess_data['id'] = $data->id_a;
-      $sess_data['username'] = $data->username;
-      $sess_data['nama'] = $data->realname;
-      $sess_data['wh1'] = $data->warehouse;
-      $sess_data['role'] = $data->role;
-      $this->session->set_userdata($sess_data);
-
-    }
-    redirect(strtolower($wh));
-  }
-
-
-}
 public function pilih()
 {
-  $id=$this->session->userdata('id');
+  $id=$this->session->userdata('nip');
   $data=array('warehouse'=>'Null');
-  $this->db->where('id_a', $id);
+  $this->db->where('nip', $id);
   $this->db->update('users', $data);
+$this->session->unset_userdata('wh1');
+
   redirect('dashboard');
   # code...
 }

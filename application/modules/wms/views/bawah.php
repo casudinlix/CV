@@ -36,7 +36,42 @@
         <script src="<?php echo duddin();?>switchery/dist/switchery.min.js"></script>
           <script src="<?php echo duddin();?>iCheck/icheck.min.js"></script>
         <!-- Select2 -->
+        <script src="<?php echo duddin()?>auto/js/jquery.lookupbox.min.js"></script>
+
+
         <script src="<?php echo duddin();?>select2/dist/js/select2.full.min.js"></script>
+
+          <script src="<?php echo duddin()?>auto/js/jquery-ui.min.js"></script>
+<script src="<?php echo duddin()?>bootstrap-daterangepicker/daterangepicker.js"></script>
+<!---daterangepicker-->
+
+          <!--INI Untuk Jquery-->
+          <script>
+
+function poprint($d) {
+
+    window.open("<?php echo site_url('wms/poprint/')?>"+$d, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=1500,left=400,width=800,height=600");
+}
+</script>
+          <script>
+              $(document).ready(function () {
+
+                $("#lookup1").lookupbox({
+
+                  title: 'Search Product',
+
+                  url: '<?php echo site_url('ajax/cari/')?>',
+                  imgLoader: '<img src="<?php echo duddin()?>auto/images/loader.gif" />',
+                  width: 500,
+                  onItemSelected: function(data){
+                    $('input[name=code]').val(data.kd_produk);
+                    $('input[name=nama]').val(data.nama_produk);
+                    $('input[name=vendor]').val(data.vendor_name);
+                  },
+                  tableHeader: ['Product Code', 'Product Name','Vendor']
+                });
+              });
+              </script>
         <script type="text/javascript">
         function checkPasswordMatch() {
           var password = $("#txtNewPassword").val();
@@ -85,7 +120,11 @@
   swal("Location Updated !")
   </script>
 <?php endif; ?>
-
+<?php if ($this->session->flashdata('postatus','value')): ?>
+  <script type="text/javascript">
+  swal("Disallowed!", "Please Check PO Status OR Denied", "error");
+  </script>
+<?php endif; ?>
 <!---akhir sweetalert-->
 
 <script type="text/javascript">
@@ -218,8 +257,175 @@ showLoaderOnConfirm: true
 
 </script>
 
-<!--Untuk sweetalert-->
+<script type="text/javascript">
+function po($d) {
+var id = $d;
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this "+id,
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
 
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/delete_po/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+
+              swal("Disallowed!", "Please Check PO Status OR Denied Permission", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
+
+<script type="text/javascript">
+function podel($kd,$po) {
+var id = $kd;
+var po =$po
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this "+id,
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
+
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/hapus_po/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+
+
+              swal("Disallowed!", "Please Check PO Status", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+  <script>
+    $( function() {
+      var progressTimer,
+        progressbar = $( "#progressbar" ),
+        progressLabel = $( ".progress-label" ),
+        dialogButtons = [{
+          text: "Cancel Download",
+          click: closeDownload
+        }],
+        dialog = $( "#dialog" ).dialog({
+          autoOpen: false,
+          closeOnEscape: false,
+          resizable: false,
+          buttons: dialogButtons,
+          open: function() {
+            progressTimer = setTimeout( progress, 2000 );
+          },
+          beforeClose: function() {
+            downloadButton.button( "option", {
+              disabled: false,
+              label: "Start Download"
+            });
+          }
+        }),
+        downloadButton = $( "#downloadButton" )
+          .button()
+          .on( "click", function() {
+            $( this ).button( "option", {
+              disabled: true,
+              label: "Downloading..."
+            });
+            dialog.dialog( "open" );
+          });
+
+      progressbar.progressbar({
+        value: false,
+        change: function() {
+          progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+        },
+        complete: function() {
+          progressLabel.text( "Complete!" );
+          dialog.dialog( "option", "buttons", [{
+            text: "Close",
+            click: closeDownload
+          }]);
+          $(".ui-dialog button").last().trigger( "focus" );
+        }
+      });
+
+      function progress() {
+        var val = progressbar.progressbar( "value" ) || 0;
+
+        progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+        if ( val <= 99 ) {
+          progressTimer = setTimeout( progress, 50 );
+        }
+      }
+
+      function closeDownload() {
+        clearTimeout( progressTimer );
+        dialog
+          .dialog( "option", "buttons", dialogButtons )
+          .dialog( "close" );
+        progressbar.progressbar( "value", false );
+        progressLabel
+          .text( "Starting download..." );
+        downloadButton.trigger( "focus" );
+      }
+    } );
+    </script>
+<!--Untuk sweetalert-->
 
         <!-- Select2 -->
         <script>
@@ -293,8 +499,18 @@ showLoaderOnConfirm: true
           responsive: true,
         fixedHeader: true,
         "serverSide": true,
-        "ajax": "<?php echo site_url('ajax/cikarang'); ?>"
+        "ajax": "<?php echo site_url('ajax/stock'); ?>"
       });
+
+      $('#po').dataTable({
+        keys: true,
+        "processing": true,
+        "serverSide": true,
+         responsive: true,
+       fixedHeader: true,
+       "serverSide": true,
+       "ajax": "<?php echo site_url('ajax/po'); ?>"
+     });
       $('#item').dataTable({
         keys: true,
         "processing": true,

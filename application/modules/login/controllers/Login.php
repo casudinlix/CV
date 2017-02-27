@@ -17,20 +17,20 @@ class Login extends CI_Controller{
 			}
 			elseif($this->session->userdata('role') == 'finance')
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 			elseif($this->session->userdata('role') == 'user')
 
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 			elseif($this->session->userdata('role') == 'warehouse')
 
 			{
-				redirect('user');
+				redirect('dashboard');
 			}
 
-    
+
     $this->load->view('login');
   }
 

@@ -24,9 +24,10 @@
                      <thead>
                        <tr>
 
-                         <th>User Name</th>
+                         <th>NIP</th>
                          <th>Real Name</th>
                          <th>Role</th>
+                         <th>Warehouse</th>
 
                          <th>Action</th>
                        </tr>

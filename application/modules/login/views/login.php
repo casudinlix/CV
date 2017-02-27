@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>.:Login | System:. </title>
+    <title>.:WMS | Login:. </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo duddin();?>bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
 
 
               <div>
-                <input type="text" class="form-control" placeholder="Username" name="username" required="" />
+                <input type="text" class="form-control" placeholder="NIP" name="username" required="" />
               </div>
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="pass" required="" />
@@ -91,11 +91,15 @@
 
 <?php if ($this->session->flashdata('gagal')): ?>
 <script>swal(
-  {title: "Password Atau Username Salah!", text: "Silakan coba lagi", timer: 3000, type: "error", showConfirmButton: false }
+  {title: "Password OR Username WRONG!", text: "Please Try Again", timer: 3000, type: "error", showConfirmButton: false }
 )</script>
 <?php endif; ?>
 
-
+<?php if ($this->session->flashdata('masuk')): ?>
+  <script>swal(
+    {title: "Not Allowed!", text: "Login Required", timer: 3000, type: "error", showConfirmButton: false }
+  )</script>
+<?php endif; ?>
 
   </body>
 </html>
