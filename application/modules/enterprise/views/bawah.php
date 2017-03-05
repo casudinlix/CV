@@ -269,6 +269,49 @@ showLoaderOnConfirm: true
 }
 
 </script>
+<script type="text/javascript">
+function carrier($d) {
+var id = $d;
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this Carrier!",
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
+
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/delete_carrier/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error deleting!", "Please try again", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
 
 <!--Untuk sweetalert-->
 
@@ -360,6 +403,15 @@ showLoaderOnConfirm: true
        "serverSide": true,
        "ajax": "<?php echo site_url('ajax/vendor'); ?>"
      });
+     $('#carrier').dataTable({
+       keys: true,
+       "processing": true,
+       "serverSide": true,
+        responsive: true,
+      fixedHeader: true,
+      "serverSide": true,
+      "ajax": "<?php echo site_url('ajax/carrier'); ?>"
+    });
       $('#item').dataTable({
         keys: true,
         "processing": true,

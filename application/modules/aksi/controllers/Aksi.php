@@ -165,7 +165,7 @@ $id=$this->input->post('id');
   $tlp=$this->input->post('tlp');
   $status=$this->input->post('status');
   $aku=$this->session->userdata('nama');
-  $data=array('kd_vendor'=>$kode,'nama_vendor'=>$nama,'alamat'=>$alamat,'tlp'=>$tlp,'status'=>$status,'update_by'=>$aku);
+  $data=array('kd_vendor'=>$kode,'vendor_name'=>$nama,'alamat'=>$alamat,'tlp'=>$tlp,'status'=>$status,'update_by'=>$aku);
   $this->db->where('kd_vendor', $id);
 $this->db->update('m_vendor', $data);
   $this->session->set_flashdata('vendor1', 'value');
@@ -207,14 +207,15 @@ $date=date('Y-m-d H:i:s');
  $duedate=date('Y-m-d',strtotime($this->input->post('duedate')));
  $res=$this->input->post('reason');
 $this->db->select_sum('po_qty');
+$type=$this->input->post('type');
 $query=$this->db->get_where('m_po_detil',array('po_num'=>$id));
 $qty=$query->row()->po_qty;
 $query->result();
  $vendor=$this->input->post('vendor');
 $row=$query->num_rows();
 $data=array('po_num'=>$this->input->post('po'),
-'po_total_qty'=>$qty,'created'=>$user,
-'date'=>$date, 'due_date'=>$duedate,'status'=>'NEW','reason'=>$res,'whid'=>$wh,'vendor_name'=>$vendor
+'po_total_qty'=>$qty,'open_qty'=>$qty,'created'=>$user,'po_type'=>$type,
+'date'=>$date, 'due_date'=>$duedate,'status'=>'NEW','whid'=>$wh,'vendor_name'=>$vendor
 );
 $this->db->insert('m_po', $data);
 redirect('wms/po');
@@ -244,5 +245,54 @@ redirect('wms/edit_po/'.$id);
   redirect('wms/edit_po/'.$id);
 }
   # code...
+}
+public function editpostingpo($value='')
+{
+  $wh=$this->session->userdata('wh1');
+  $id=$this->input->post('po');
+  $user=$this->session->userdata('nama');
+  $date=date('Y-m-d H:i:s');
+   $duedate=date('Y-m-d',strtotime($this->input->post('duedate')));
+   $res=$this->input->post('reason');
+  $this->db->select_sum('po_qty');
+  $type=$this->input->post('type');
+  $query=$this->db->get_where('m_po_detil',array('po_num'=>$id));
+  $qty=$query->row()->po_qty;
+  $query->result();
+   $vendor=$this->input->post('vendor');
+  $row=$query->num_rows();
+  $data=array('po_num'=>$this->input->post('po'),
+  'po_total_qty'=>$qty,'created'=>$user,'po_type'=>$type,
+  'date'=>$date, 'due_date'=>$duedate,'status'=>'NEW','whid'=>$wh,'vendor_name'=>$vendor
+  );
+  $this->db->where('po_num', $id);
+  $this->db->update('m_po', $data);
+  redirect('wms/po');
+
+}
+public function save_carrier($value='')
+{
+  $code=strtoupper($this->input->post('code')) ;
+  $nopol=strtoupper($this->input->post('nopol'));
+  $com=strtoupper($this->input->post('com'));
+  $type=$this->input->post('type');
+  $status=$this->input->post('status');
+  $data=array('code_carrier'=>$code,'nopol'=>$nopol,'company'=>$com,'type'=>$type,'status'=>$status);
+  $this->db->insert('m_carrier', $data);
+  redirect('enterprise/carrier');
+}
+public function editcarrier()
+{
+  $id=$this->uri->segment(3);
+  $code=strtoupper($this->input->post('code')) ;
+  $nopol=strtoupper($this->input->post('nopol'));
+  $com=strtoupper($this->input->post('com'));
+  $type=$this->input->post('type');
+  $status=$this->input->post('status');
+  $data=array('nopol'=>$nopol,'company'=>$com,'type'=>$type,'status'=>$status);
+  $this->db->where('code_carrier', $code);
+  $this->db->update('m_carrier', $data);
+  $this->session->set_flashdata('oke', 'value');
+redirect('enterprise/carrier');
 }
 }

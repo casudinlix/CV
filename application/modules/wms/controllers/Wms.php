@@ -135,6 +135,7 @@ public function create_po()
     $data['kode']=$this->m_produk->create_po();
     $data['whe']=$this->session->userdata('wh1');
     $data['title']='WMS-Rumah Kreasi';
+    $data['type']=$this->db->get('m_type_po')->result();
     $data['po']=$this->db->get_where('m_po_detil',array('po_num'=>$this->m_produk->create_po()))->result();
     $data['namaku']=$this->session->userdata('nama');
     $data['akses']=$this->session->userdata('wh');
@@ -176,11 +177,12 @@ public function edit_po()
     $data['whe']=$this->session->userdata('wh1');
     $data['title']='WMS-Rumah Kreasi';
     $data['po']=$this->db->get_where('m_po_detil',array('po_num'=>$id))->result(); $data['status']=$this->db->get_where('m_po',array('po_num'=>$id))->result();
+    $data['type']=$this->db->get('m_type_po')->result();
     $data['namaku']=$this->session->userdata('nama');
     $data['akses']=$this->session->userdata('wh');
     $data['wh2']=$this->session->userdata('pilih');
     $data['me']=$this->session->userdata('nip');
-
+    $data['po1']=$this->db->get_where('m_po',array('po_num'=>$id))->row();
 
 
     $this->load->view('dashboard1',$data);
@@ -190,5 +192,9 @@ public function edit_po()
       redirect('dashboard');
   }
   # code...
+}
+public function asn()
+{
+  
 }
 }

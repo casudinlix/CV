@@ -1,8 +1,9 @@
-
-
-      </div>
-    </div>
-
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
     <!-- jQuery -->
     <script src="<?php echo duddin();?>jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -582,5 +583,6 @@ showLoaderOnConfirm: true
    <!-- /Datatables -->
 
 <!--Tutup Scrip data tables !-->
+
   </body>
 </html>

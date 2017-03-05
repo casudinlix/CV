@@ -90,7 +90,7 @@
                   <li><a><i class="fa fa-reply"></i> Inbound<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                   <li><a href="<?php echo site_url('wms/po')?>">Purcahe Order</a></li>
-                      <li><a href="<?php echo site_url('wms/po')?>">ASN</a></li>
+                      <li><a href="<?php echo site_url('wms/asn')?>">ASN/Receipt</a></li>
                       <li><a href="typography.html">Typography</a></li>
                       <li><a href="icons.html">Icons</a></li>
                       <li><a href="glyphicons.html">Glyphicons</a></li>

@@ -14,8 +14,8 @@ class M_produk extends CI_Model{
     $wh=$this->session->userdata('wh1');
     $years                = date('Y');// tahun
 		$get_3_number_of_year = substr($years, 3);// mengambil 3 angka dari sebelah kanan pada tahun sekarang
-$bulan=date('m');
-    $this->db->select('RIGHT(po_num,6) as kode', FALSE);
+    $bulan=date('m');
+    $this->db->select('RIGHT(po_num,7) as kode', TRUE);
 		$this->db->order_by('po_num', 'DESC');
 		//$this->db->limit(1);
 		$query  = $this->db->get('m_po')->num_rows();

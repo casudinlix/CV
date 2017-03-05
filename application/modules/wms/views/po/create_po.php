@@ -48,16 +48,31 @@
   <div class="control-group">
     <div class="controls">
       <div class="col-md-4 xdisplay_inputx form-group has-feedback">
-  <input type="text" class="form-control has-feedback-left" id="datepicker" placeholder="Due Date" name='duedate' required="" autocomplete="off">
-        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-  <textarea name="reason" class="form-control form-group" required="" placeholder="Reason"></textarea>
-  <input type="submit" name="Posting" value="Posting" class="btn btn-warning">
-  <a href="<?php echo site_url('wms/po')?>" class="btn btn-danger">Back</a>
-      </div>
-<input type="hidden" name="po" value="<?php echo $kode?>">
-    </div>
+  <?php if ($po==NULL): ?>
 
-  </div>
+  <?php else: ?>
+
+    <input type="text" class="form-control has-feedback-left" id="datepicker" placeholder="Due Date" name='duedate' required="" autocomplete="off">
+  <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+              <select class="jenis form-control" tabindex="-1" name='type' required="true">
+                <option></option>
+    <?php foreach ($type as $key): ?>
+    <option value="<?php echo $key->po_type;?>"><?php echo $key->po_type;?></option>
+    <?php endforeach; ?>
+
+              </select>
+
+
+
+    <input type="submit" name="Posting" value="Posting" class="btn btn-warning">
+    <a href="<?php echo site_url('wms/po')?>" class="btn btn-danger">Back</a>
+
+    <input type="hidden" name="po" value="<?php echo $kode?>">
+
+  <?php endif; ?>
+</div>
+</div>
+</div>
   <div class="table-responsive">
 <div class="well" style="overflow-y: scroll; height:300px;">
 

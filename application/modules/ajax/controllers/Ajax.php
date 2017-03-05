@@ -354,17 +354,18 @@ public function po()
     array( 'db' => '`u`.`po_num`', 'dt' => 0, 'field' => 'po_num' ),
     //array( 'db' => 'username', 'dt' => 0, 'field' => 'username' ),
     array( 'db' => '`u`.`po_total_qty`', 'dt' => 1, 'field' => 'po_total_qty' ),
+array( 'db' => 'open_qty',   'dt' => 2, 'field' => 'open_qty' ),
+    array( 'db' => 'created',   'dt' => 3, 'field' => 'created' ),
+    array( 'db' => 'po_type',   'dt' => 4, 'field' => 'po_type' ),
+    array( 'db' => 'date',   'dt' => 5, 'field' => 'date' ),
+    array( 'db' => 'due_date',   'dt' => 6, 'field' => 'due_date' ),
+    array( 'db' => 'vendor_name',   'dt' => 7, 'field' => 'vendor_name' ),
+    array( 'db' => 'status',   'dt' => 8, 'field' => 'status' ),
 
-    array( 'db' => 'created',   'dt' => 2, 'field' => 'created' ),
-    array( 'db' => 'date',   'dt' => 3, 'field' => 'date' ),
-    array( 'db' => 'due_date',   'dt' => 4, 'field' => 'due_date' ),
-    array( 'db' => 'vendor_name',   'dt' => 5, 'field' => 'vendor_name' ),
-    array( 'db' => 'status',   'dt' => 6, 'field' => 'status' ),
-    array( 'db' => 'reason',   'dt' => 7, 'field' => 'reason' ),
     //array( 'db' => '`u`.`lokasi`', 'dt' => 8, 'field' => 'lokasi' ),
     //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
     //
-    array('db' => '`u`.`po_num`', 'dt' => 8, 'field' => 'po_num', 'formatter' => function( $d ) {
+    array('db' => '`u`.`po_num`', 'dt' => 9, 'field' => 'po_num', 'formatter' => function( $d ) {
           return '<a href="'. site_url('wms/edit_po/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i></a> <a onclick=\'poprint("' .'' . $d . '")\' href="#" class=\'btn btn-info\' ><i class=\'fa fa-print \' title=\'Print\'></i></a> <a onclick=\'po("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i></a>';
       })
 );
@@ -437,5 +438,65 @@ public function hapus_po($kd,$po)
   $this->db->delete('m_po_detil');
 
   # code...
+}
+public function carrier($value='')
+{
+  $wh=$this->session->userdata('wh1');
+
+  $table = 'm_carrier';
+  // Table's primary key
+  $primaryKey = 'code_carrier';
+  $columns = array(
+    array( 'db' => '`u`.`code_carrier`', 'dt' => 0, 'field' => 'code_carrier' ),
+
+    array( 'db' => '`u`.`nopol`', 'dt' => 1, 'field' => 'nopol' ),
+    array( 'db' => 'company', 'dt' => 2, 'field' => 'company' ),
+    array( 'db' => 'type',   'dt' => 3, 'field' => 'type' ),
+    array( 'db' => 'status',   'dt' => 4, 'field' => 'status' ),
+
+    //array( 'db' => '`u`.`lokasi`', 'dt' => 8, 'field' => 'lokasi' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
+    //
+    array('db' => '`u`.`code_carrier`', 'dt' => 5, 'field' => 'code_carrier', 'formatter' => function( $d ) {
+          return '<a href="'. site_url('enterprise/editcarrier/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i></a><a onclick=\'carrier("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i></a>';
+      })
+);
+
+//$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+    'user' => $this->db->username,
+    'pass' => $this->db->password,
+    'db'   => $this->db->database,
+    'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `m_carrier` AS `u`";
+// $extraWhere = "`u`.`whid` = '$wh' ";
+  echo json_encode(
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  );
+}
+public function delete_carrier()
+{
+  $id=$this->uri->segment(3);
+  $wh=$this->session->userdata('wh1');
+  $akses=$this->session->userdata('role')=='super-user';
+$cek=$this->db->get_where('m_carrier',array('code_carrier'=>$id))->row_array();
+if ($akses)  {
+  $this->db->where(array('code_carrier'=>$id));
+  $query=$this->db->delete('m_carrier');
+
+
+}else {
+error();
+}
 }
 }

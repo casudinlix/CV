@@ -81,6 +81,7 @@
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/price')?>">Price<span class="fa fa-money"></span></a></li>
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/location')?>">Location<span class="fa fa-location-arrow"></span></a>
   <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/vendor')?>">Vendor<span class="fa fa-truck"></span></a>
+    <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/carrier')?>">Carrier<span class="fa fa-truck"></span></a>
 
 </li>
                     </ul>

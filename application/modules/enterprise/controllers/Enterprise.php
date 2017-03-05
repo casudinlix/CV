@@ -228,4 +228,44 @@ public function edit_vendor($value='')
   $this->load->view('bawah',$data);
   # code...
 }
+public function carrier()
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('carrier/carrier',$data);
+  $this->load->view('bawah',$data);
+}
+public function addcarrier()
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+  $data['car'] =$this->db->enum('m_carrier','type');
+$data['status'] =$this->db->enum('m_carrier','status');
+  $this->load->view('dashboard1',$data);
+  $this->load->view('carrier/addcarrier',$data);
+  $this->load->view('bawah',$data);
+}
+public function editcarrier($value='')
+{
+$id=$this->uri->segment(3);
+$data['whe']=$this->session->userdata('wh1');
+$data['title']='WMS-Rumah Kreasi';
+$data['namaku']=$this->session->userdata('nama');
+$data['akses']=$this->session->userdata('wh');
+
+$data['car'] =$this->db->enum('m_carrier','type');
+$data['status'] =$this->db->enum('m_carrier','status');
+$data['carrier']=$this->db->get_where('m_carrier',array('code_carrier'=>$id))->row();
+$this->load->view('dashboard1',$data);
+$this->load->view('carrier/editcarrier',$data);
+$this->load->view('bawah',$data);
+}
 }

@@ -7,13 +7,9 @@
                <div class="x_panel">
                  <div class="x_title">
                   <div>
-<?php if ($role): ?>
-    <a href="<?php echo site_url('wms/create_po')?>" class="btn btn-success"><i class="fa fa-truck">Create PO</i></a></div>
-<?php else: ?>
-    <a href="#" disabled class="btn btn-success"><i class="fa fa-truck">Create PO</i></a></div>
-<?php endif; ?>
 
-                   <h2>List<small>Items</small></h2>
+                   <a href="<?php echo site_url(strtolower($whe).'/addcarrier')?>" class="btn btn-success"><i class="fa fa-truck">Add Carrier</i></a></div>
+                   <h2>List<small>Carrier</small></h2>
 
                    <ul class="nav navbar-right panel_toolbox">
                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -24,21 +20,15 @@
                  </div>
                  <div class="x_content">
 <br>
- <table id="po"  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+ <table id="carrier"  class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                      <thead>
                        <tr>
 
-                         <th>PO Number</th>
-                         <th>PO QTY </th>
-                         <th>Open QTY</th>
-
-<th>Created BY</th>
-<th>PO Type</th>
-<th>Date</th>
-<th>Due Date</th>
-<th>Vendor</th>
+                         <th>Carrier Code</th>
+                         <th>Number</th>
+                         <th>Company</th>
+<th>Type</th>
 <th>Status</th>
-
                          <th>Action</th>
                        </tr>
                      </thead>
