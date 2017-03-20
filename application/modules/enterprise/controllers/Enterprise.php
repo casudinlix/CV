@@ -9,6 +9,7 @@ class Enterprise extends MX_Controller{
     //Codeigniter : Write Less Do More
     $login=$this->session->userdata('login');
     $wh=$this->session->userdata('wh1');
+    $me=$this->session->userdata('nip');
     $role=$this->session->userdata('role')=='super-user';
     $this->load->model('m_login');
     $data=$this->m_login->wh($wh,$role);
@@ -41,7 +42,7 @@ class Enterprise extends MX_Controller{
     $data['title']='WMS-Rumah Kreasi';
     $data['namaku']=$this->session->userdata('nama');
     $data['akses']=$this->session->userdata('wh');
-
+    $data['me']=$this->session->userdata('nip');
 
     $this->load->view('dashboard1',$data);
     $this->load->view('depan',$data);
@@ -69,6 +70,7 @@ class Enterprise extends MX_Controller{
     $data['user']=$this->db->get_where('users',array('nip'=>$id))->row_array();
     $data['title']='WMS-Rumah Kreasi';
     $data['namaku']=$this->session->userdata('nama');
+$data['wh']=$this->db->get('wh')->result();
     $this->load->view('dashboard1',$data);
     $this->load->view('edit_user',$data);
     $this->load->view('bawah',$data);
@@ -267,5 +269,94 @@ $data['carrier']=$this->db->get_where('m_carrier',array('code_carrier'=>$id))->r
 $this->load->view('dashboard1',$data);
 $this->load->view('carrier/editcarrier',$data);
 $this->load->view('bawah',$data);
+}
+public function ship($value='')
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('ship/ship',$data);
+  $this->load->view('bawah',$data);
+}
+public function addship($value='')
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('ship/addship',$data);
+  $this->load->view('bawah',$data);
+}
+public function editship($value='')
+{
+$id=$this->uri->segment(3);
+$data['whe']=$this->session->userdata('wh1');
+$data['title']='WMS-Rumah Kreasi';
+$data['namaku']=$this->session->userdata('nama');
+$data['akses']=$this->session->userdata('wh');
+$data['ship']=$this->db->get_where('m_ship_to',array('shipto'=>$id))->row();
+
+$this->load->view('dashboard1',$data);
+$this->load->view('ship/editship',$data);
+$this->load->view('bawah',$data);
+}
+public function me($value='')
+{
+  $nip=$this->uri->segment(3);
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+  $data['wh2']=$this->session->userdata('pilih');
+  $data['me']=$this->session->userdata('nip');
+  $data['aku']=$this->db->get_where('users', array('nip'=>$nip))->row_array();
+  $data['wh']=$this->db->get('wh')->result();
+  $this->load->view('dashboard1',$data);
+  $this->load->view('me/me',$data);
+  $this->load->view('bawah',$data);
+}
+public function wh($value='')
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('wh/wh',$data);
+  $this->load->view('bawah',$data);
+}
+public function addwh($value='')
+{
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('wh/addwh',$data);
+  $this->load->view('bawah',$data);
+}
+public function editwh($value='')
+{
+  $id=$this->uri->segment(3);
+  $data['whe']=$this->session->userdata('wh1');
+  $data['title']='WMS-Rumah Kreasi';
+  $data['namaku']=$this->session->userdata('nama');
+  $data['akses']=$this->session->userdata('wh');
+  $data['gudang']=$this->db->get_where('wh',array('whid'=>$id))->row();
+
+  $this->load->view('dashboard1',$data);
+  $this->load->view('wh/editwh',$data);
+  $this->load->view('bawah',$data);
 }
 }

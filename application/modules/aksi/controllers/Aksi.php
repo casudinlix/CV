@@ -188,13 +188,17 @@ public function tambahpo()
 $this->db->where('kd_produk', $id);
 $this->db->where('po_num', $id);
 $this->db->update('m_po_detil', $data);
-redirect('wms/create_po');
+redirect($_SERVER['HTTP_REFERER']);
+
+//redirect('wms/create_po');
   }else{
 
   $data=array('po_num'=>$id,'kd_produk'=>$code,'nama_produk'=>$nama,'vendor_name'=>$vendor,'po_qty'=>$qty);
   $this->db->insert('m_po_detil', $data);
   $this->session->set_flashdata('oke', 'value');
-  redirect('wms/create_po');
+  redirect($_SERVER['HTTP_REFERER']);
+
+  //redirect('wms/create_po');
 }
   # code...
 }
@@ -294,5 +298,101 @@ public function editcarrier()
   $this->db->update('m_carrier', $data);
   $this->session->set_flashdata('oke', 'value');
 redirect('enterprise/carrier');
+}
+public function saveship($value='')
+{
+
+  $code=strtoupper($this->input->post('code'));
+  $com=strtoupper($this->input->post('com'));
+  $ad=strtoupper($this->input->post('address'));
+
+  $pho=$this->input->post('phone');
+  $add=$this->session->userdata('nama');
+  $date=date('Y-m-d H:i:s');
+  $data=array('shipto'=>$code,
+'company'=>$com,'address'=>$ad,'phone'=>$pho,'added'=>$add,
+'adddate'=>$date);
+$this->db->where('shipto', $code);
+$cek=$this->db->get('m_ship_to')->num_rows();
+if ($cek==1) {
+
+  $this->session->set_flashdata('duplikat', 'value');
+	    redirect('enterprise/addship');
+}else{
+$this->db->insert('m_ship_to', $data);
+redirect('enterprise/ship');
+}
+}
+public function editship($value='')
+{
+  $code=strtoupper($this->input->post('code'));
+  $com=strtoupper($this->input->post('com'));
+  $ad=strtoupper($this->input->post('address'));
+
+  $pho=$this->input->post('phone');
+  $add=$this->session->userdata('nama');
+  $date=date('Y-m-d H:i:s');
+  $data=array('shipto'=>$code,
+'company'=>$com,'address'=>$ad,'phone'=>$pho,'added'=>$add,
+'adddate'=>$date);
+$this->db->where('shipto', $code);
+$this->db->update('m_ship_to', $data);
+redirect('enterprise/ship');
+}
+public function saveme()
+{
+  $id=$this->input->post('id');
+  //  $username =$this->input->post('username');
+  $nama=$this->input->post('realname',TRUE);
+  $pass=base64_encode($this->input->post('pass',TRUE));
+  $gudang= implode(',',$this->input->post('wh',TRUE));
+  $role=$this->input->post('role',TRUE);
+  $data=array('realname'=>$nama,'pass'=>$pass,'whid'=>$gudang);
+  $this->db->where('nip',$id);
+
+  $r=$this->db->update('users',$data);
+  if ($r==TRUE) {
+  $this->session->set_flashdata('m','value');
+  $q=$this->session->userdata('wh1');
+  redirect('enterprise/user');
+  }
+}
+public function savewh($value='')
+{
+  $code=strtoupper($this->input->post('whid'));
+  $nama=strtoupper($this->input->post('nama'));
+  $ad=strtoupper($this->input->post('address'));
+
+  $pho=$this->input->post('phone');
+  $add=$this->session->userdata('nama');
+  $date=date('Y-m-d H:i:s');
+  $data=array('whid'=>$code,
+'nama_wh'=>$nama,'alamat'=>$ad,'tlp'=>$pho,'added'=>$add);
+$this->db->where('whid', $code);
+$cek=$this->db->get('wh')->num_rows();
+if ($cek==1) {
+
+  $this->session->set_flashdata('duplikat', 'value');
+	    redirect('enterprise/addwh');
+}else{
+$this->db->insert('wh', $data);
+redirect('enterprise/wh');
+}
+}
+public function editwh($value='')
+{
+  $id=$this->input->post('id');
+  $code=strtoupper($this->input->post('whid'));
+  $nama=strtoupper($this->input->post('nama'));
+  $ad=strtoupper($this->input->post('address'));
+
+  $pho=$this->input->post('phone');
+  $add=$this->session->userdata('nama');
+  $date=date('Y-m-d H:i:s');
+  $data=array('whid'=>$code,
+'nama_wh'=>$nama,'alamat'=>$ad,'tlp'=>$pho,'added'=>$add);
+$this->db->where('whid', $code);
+$this->db->update('wh', $data);
+redirect('enterprise/wh');
 }
 }

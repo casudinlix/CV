@@ -54,32 +54,6 @@
 
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Warehouse</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="checkbox">
-                      <?php foreach (explode(',',$user['whid']) as $key): ?>
-                        <label>
- <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key ?>" checked="checked"><?php echo $key ?>
-                        </label>
-                      <?php endforeach; ?>
-                      <?php foreach ($wh as $key): ?>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key->nama_wh ?>"><?php echo $key->nama_wh ?>
-                          </label>
-                        </div>
-                      <?php endforeach; ?>
-
-
-
-
-
-                    </div>
-
-
-                  </div>
-                </div>
 
                 <div class="form-group">
                   <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Role</label>
@@ -100,7 +74,7 @@
                 <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <a href="<?php echo site_url('enterprise/user')?>" class="btn btn-danger">Cancel</a>
+                    <a href="<?php echo site_url('dashboard/setting_users')?>" class="btn btn-danger">Cancel</a>
                     <input type="submit" name="submit" value="Update" class="btn btn-success">
                   </div>
                 </div>

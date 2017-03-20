@@ -67,7 +67,7 @@
                   data = result;
 
                 settings.item = data;
-                var table = "<table cellspacing='0' cellpadding='3' id='lookupbox-result' class='lookupbox-result'>";
+                var table = "<table cellspacing='0' cellpadding='3' id='lookupbox-result' class='table table-striped table-bordered dt-responsive nowrap' border='1'>";
 
                 if (settings.tableHeader != null) {
                   table = table + "<tr id='lookupbox-result-header' class='lookupbox-result-header'>";

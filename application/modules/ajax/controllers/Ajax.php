@@ -428,6 +428,30 @@ public function cari()
   }
   echo json_encode($row);
 }
+public function cari1($value='')
+{
+  $wh=$this->session->userdata('wh1');
+  $id=$this->uri->segment(3);
+
+  $this->db->select('kd_produk, nama_produk,whid,lokasi,qty');
+
+
+   //$this->db->or_like('whid', $id);
+
+   //$this->db->where('Field / comparison', $Value);
+   $this->db->or_like('kd_produk',$id);
+   //$this->db->or_like('nama_produk', $id);
+    $this->db->where('whid  !=',$this->session->userdata('wh1'));
+  $query=$this->db->get('join_stock');
+  $row=array();
+  foreach ($query->result() as $key) {
+    $row[]=$key;
+
+    # code...
+  }
+  echo json_encode($row);
+}
+
 public function hapus_po($kd,$po)
 {
   $kd=$this->uri->segment(3);
@@ -498,5 +522,118 @@ if ($akses)  {
 }else {
 error();
 }
+}
+public function ship($value='')
+{
+  $wh=$this->session->userdata('wh1');
+
+  $table = 'm_ship_to';
+  // Table's primary key
+  $primaryKey = 'shipto';
+  $columns = array(
+    array( 'db' => '`u`.`shipto`', 'dt' => 0, 'field' => 'shipto' ),
+    //array( 'db' => 'username', 'dt' => 0, 'field' => 'username' ),
+    array( 'db' => '`u`.`company`', 'dt' => 1, 'field' => 'company' ),
+//array( 'db' => 'city',   'dt' => 2, 'field' => 'city' ),
+    array( 'db' => 'address',   'dt' => 2, 'field' => 'address' ),
+
+
+    array( 'db' => 'phone',   'dt' => 3, 'field' => 'phone' ),
+    array( 'db' => 'added',   'dt' => 4, 'field' => 'added' ),
+    array( 'db' => 'adddate',   'dt' => 5, 'field' => 'adddate' ),
+
+    //array( 'db' => '`u`.`lokasi`', 'dt' => 8, 'field' => 'lokasi' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
+    //
+    array('db' => '`u`.`shipto`', 'dt' => 6, 'field' => 'shipto', 'formatter' => function( $d ) {
+          return '<a href="'. site_url('enterprise/editship/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i></a>  <a onclick=\'ship("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i></a>';
+      })
+);
+
+//$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+  	'user' => $this->db->username,
+  	'pass' => $this->db->password,
+  	'db'   => $this->db->database,
+  	'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `m_ship_to` AS `u`";
+ //$extraWhere = "`u`.`whid` = '$wh' ";
+  echo json_encode(
+  	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  );
+}
+public function deleteship($value='')
+{
+  $id=$this->uri->segment(3);
+  $wh=$this->session->userdata('wh1');
+  $akses=$this->session->userdata('role')=='super-user';
+$cek=$this->db->get_where('m_ship_to',array('shipto'=>$id))->row_array();
+if ($akses)  {
+  $this->db->where(array('shipto'=>$id));
+  $query=$this->db->delete('m_ship_to');
+
+
+}else {
+error();
+}
+}
+public function wh($value='')
+{
+  $wh=$this->session->userdata('wh1');
+
+  $table = 'wh';
+  // Table's primary key
+  $primaryKey = 'whid';
+  $columns = array(
+    array( 'db' => '`u`.`whid`', 'dt' => 0, 'field' => 'whid' ),
+    //array( 'db' => 'username', 'dt' => 0, 'field' => 'username' ),
+    array( 'db' => '`u`.`nama_wh`', 'dt' => 1, 'field' => 'nama_wh' ),
+  //array( 'db' => 'city',   'dt' => 2, 'field' => 'city' ),
+    array( 'db' => 'alamat',   'dt' => 2, 'field' => 'alamat' ),
+
+
+    array( 'db' => 'tlp',   'dt' => 3, 'field' => 'tlp' ),
+    array( 'db' => 'added',   'dt' => 4, 'field' => 'added' ),
+  //  array( 'db' => 'adddate',   'dt' => 5, 'field' => 'adddate' ),
+
+    //array( 'db' => '`u`.`lokasi`', 'dt' => 8, 'field' => 'lokasi' ),
+    //array( 'db' => 'user_grop',     'dt' => 3, 'field' => 'user_grop'),
+    //
+    array('db' => '`u`.`whid`', 'dt' => 5, 'field' => 'whid', 'formatter' => function( $d ) {
+          return '<a href="'. site_url('enterprise/editwh/') .'' . $d . '" class=\'btn btn-warning\'><i class=\'fa fa-edit\' title=\'Edit\'></i></a>  <a onclick=\'wh("' .'' . $d . '")\' href="#" class=\'btn btn-danger\' ><i class=\'fa fa-trash \' title=\'Delete\'></i></a>';
+      })
+  );
+
+  //$hapus=array('db' => '`u`.`username`', 'dt' => 3, 'field' => 'username', 'formatter' => function( $d ) {
+  //    return '<a href="'. site_url('ajax/delet_user/') .'' . $d . '" class=\'btn btn-danger\'><i class=\'fa fa-edit\' title=\'Edit\'></i>Edit</a>'; });
+
+  // SQL server connection information
+  $sql_details = array(
+    'user' => $this->db->username,
+    'pass' => $this->db->password,
+    'db'   => $this->db->database,
+    'host' => $this->db->hostname
+  );
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If you just want to use the basic configuration for DataTables with PHP
+   * server-side, there is no need to edit below this line.
+   */
+  // require( 'ssp.class.php' );
+  //require('inventory/produk/ssp.customized.class.php' );
+  $joinQuery = "FROM `wh` AS `u`";
+  //$extraWhere = "`u`.`whid` = '$wh' ";
+  echo json_encode(
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns,  $joinQuery)
+  );
 }
 }

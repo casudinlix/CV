@@ -18,7 +18,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Form Edit Users <small>different form elements</small></h2>
+              <h2>Form Add Users <small>different form elements</small></h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -28,64 +28,44 @@
             </div>
             <div class="x_content">
               <br />
- <form class="form-horizontal" action="<?php echo site_url('aksi/edit_user')?>" method="post">
+ <form class="form-horizontal" action="<?php echo site_url('aksi/save_user')?>" method="post">
 
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username<span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name='username' id="first-name" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $this->uri->segment(3)?>" readonly="">
-                    <input type="hidden" name="id" value="<?php echo $this->uri->segment(3)?>">
+                    <input type="text" name='username' id="first-name" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">realname <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-<input type="text" id="last-name" name="realname" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $user['realname']?>">
+<input type="text" id="last-name" name="realname" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="password" id="password"  required="required" class="form-control col-md-7 col-xs-12" name="pass" value="<?php echo base64_decode ($user['pass']) ?>">
-      <input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'"> Show password
-
+      <input type="password" id="txtNewPassword"  required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Warehouse</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Re Password <span class="required">*</span>
+                  </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="checkbox">
-                      <?php foreach (explode(',',$user['whid']) as $key): ?>
-                        <label>
- <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key ?>" checked="checked"><?php echo $key ?>
-                        </label>
-                      <?php endforeach; ?>
-                      <?php foreach ($wh as $key): ?>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key->nama_wh ?>"><?php echo $key->nama_wh ?>
-                          </label>
-                        </div>
-                      <?php endforeach; ?>
+                    <input type="password" id="txtConfirmPassword" name="pass" required="required" class="form-control col-md-7 col-xs-12" onChange="checkPasswordMatch();" >
 
-
-
-
-
-                    </div>
-
-
+                    <div class="registrationFormAlert" id="divCheckPasswordMatch">
+                  </div>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Role</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="select2_single form-control" tabindex="-1" name='role'>
-                      <option><?php echo $user['role'] ?></option>
+                      <option></option>
                       <option value="super-user">Super User</option>
                       <option value="finance">Finace</option>
                       <option value="wherehouse">WareHouse</option>
@@ -100,8 +80,8 @@
                 <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <a href="<?php echo site_url('enterprise/user')?>" class="btn btn-danger">Cancel</a>
-                    <input type="submit" name="submit" value="Update" class="btn btn-success">
+                    <a href="<?php echo site_url('dashboard/setting_users')?>" class="btn btn-danger">Cancel</a>
+                    <input type="submit" name="submit" value="Save" class="btn btn-success">
                   </div>
                 </div>
 

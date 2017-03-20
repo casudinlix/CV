@@ -22,29 +22,15 @@ class Home extends MX_Controller {
 	 */
 	public function index()
 	{
-		if($this->session->userdata('role') == 'super-user')
+		if($this->session->userdata('login') == TRUE)
 			{
 				redirect('dashboard');
-			}
-			elseif($this->session->userdata('role') == 'finance')
-			{
-				redirect('dashboard');
-			}
-			elseif($this->session->userdata('role') == 'user')
-
-			{
-				redirect('dashboard');
-			}
-			elseif($this->session->userdata('role') == 'warehouse')
-
-			{
-				redirect('dashboard');
-			}
+			}else{
 
    redirect('login');
 		}
 
-
+}
 
 
 
@@ -78,21 +64,11 @@ class Home extends MX_Controller {
 				$this->session->set_userdata($sess_data);
 
 			}
-			if($this->session->userdata('role') == 'super-user')
+			if($this->session->userdata('login') == TRUE)
 			{
 				redirect('dashboard');
 			}
-			elseif($this->session->userdata('role') == 'finance')
-			{
-				redirect('dashboard');
-			}
-			elseif($this->session->userdata('role') == 'user')
-			{
-				redirect('dashboard');
-			}
-
-
-  }
+			  }
 	$this->session->set_flashdata('gagal', 'value');
 	    redirect('login');
 }

@@ -17,7 +17,47 @@
     <link href="<?php echo duddin();?>nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="<?php echo duddin();?>malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
-
+    <script type="text/javascript">
+                function loadKabupaten()
+                {
+                    var propinsi = $("#propinsi").val();
+                    $.ajax({
+                        type:'GET',
+                        url:"<?php echo site_url(); ?>other/kabupaten",
+                        data:"id=" + propinsi,
+                        success: function(html)
+                        {
+                           $("#kabupatenArea").html(html);
+                        }
+                    });
+                }
+                function loadKecamatan()
+                {
+                    var kabupaten = $("#kabupaten").val();
+                    $.ajax({
+                        type:'GET',
+                        url:"<?php echo site_url(); ?>other/kecamatan",
+                        data:"id=" + kabupaten,
+                        success: function(html)
+                        {
+                            $("#kecamatanArea").html(html);
+                        }
+                    });
+                }
+                function loadDesa()
+                {
+                    var kecamatan = $("#kecamatan").val();
+                    $.ajax({
+                        type:'GET',
+                        url:"<?php echo site_url(); ?>other/desa",
+                        data:"id=" + kecamatan,
+                        success: function(html)
+                        {
+                            $("#desaArea").html(html);
+                        }
+                    });
+                }
+            </script>
     <!-- Custom Theme Style -->
     <link href="<?php echo duddin();?>build/css/custom.min.css" rel="stylesheet">
       <link href="<?php echo duddin();?>bootstrap-sweetalert-master/dist/sweetalert.css" rel="stylesheet">
@@ -76,12 +116,14 @@
                   <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
    <li><i></i><a href="<?php echo site_url($this->uri->segment(1).'/user')?>">Users<span class="fa fa-users"></span></a></li>
+<li><i></i><a href="<?php echo site_url(strtolower( $whe).'/wh')?>">Warehose Facility<span class="fa fa-cloud"></span></a></li>
 
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/item')?>">Item<span class="fa fa-cubes"></span></a></li>
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/price')?>">Price<span class="fa fa-money"></span></a></li>
 <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/location')?>">Location<span class="fa fa-location-arrow"></span></a>
   <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/vendor')?>">Vendor<span class="fa fa-truck"></span></a>
     <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/carrier')?>">Carrier<span class="fa fa-truck"></span></a>
+      <li><i></i><a href="<?php echo site_url(strtolower( $whe).'/ship')?>">Ship To<span class="fa fa-university"></span></a>
 
 </li>
                     </ul>
@@ -210,7 +252,7 @@
 
                       </a>
                     </li>
-
+<li><a href="<?php echo site_url('enterprise/me/'.$this->session->userdata('nip')) ?>"><i class="fa fa-cogs pull-right"></i>Settings</a></li>
                     <li><a href="<?php echo site_url('home/keluar') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

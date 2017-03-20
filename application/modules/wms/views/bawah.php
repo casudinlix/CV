@@ -73,6 +73,27 @@ function poprint($d) {
                 });
               });
               </script>
+              <script>
+                  $(document).ready(function () {
+
+                    $("#pointernal").lookupbox({
+
+                      title: 'Search Product',
+
+                      url: '<?php echo site_url('ajax/cari1/')?>',
+                      imgLoader: '<img src="<?php echo duddin()?>auto/images/loader.gif" />',
+                      width: 500,
+                      onItemSelected: function(data){
+                        $('input[name=code]').val(data.kd_produk);
+                        $('input[name=nama]').val(data.nama_produk);
+                        $('input[name=vendor]').val(data.whid);
+                        $('input[name=lokasi]').val(data.lokasi);
+                        $('input[name=qty]').val(data.qty);
+                      },
+                      tableHeader: ['Product Code', 'Product Name','WH','Location','QTY']
+                    });
+                  });
+                  </script>
         <script type="text/javascript">
         function checkPasswordMatch() {
           var password = $("#txtNewPassword").val();

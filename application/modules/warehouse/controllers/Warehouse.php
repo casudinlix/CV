@@ -23,15 +23,16 @@ class Warehouse extends MX_Controller{
 	   $sess_data['wh1'] = $wh;
      $this->session->set_userdata($sess_data);
      $wh=$this->session->userdata('wh1');
-     
+
      if(!$wh)
      {
        $this->session->set_flashdata('gudang', 'value');
        redirect('dashboard');
 
        }
-     if ($wh=='Enterprise') {
+     if ($wh=='ENTERPRISE') {
        $sess_data['wh1'] = $wh;
+       $sess_data['nip'] = $this->session->userdata('nip');
        $this->session->set_userdata($sess_data);
        redirect('enterprise');
      }

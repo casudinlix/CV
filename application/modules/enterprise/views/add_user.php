@@ -97,6 +97,8 @@
                       <option value="finance">Finace</option>
                       <option value="warehouse">WareHouse</option>
                       <option value="user">User</option>
+                      <option value="admin">Admin</option>
+
 
                     </select>
 

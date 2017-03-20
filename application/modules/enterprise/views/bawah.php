@@ -54,10 +54,17 @@
          $("#txtConfirmPassword").keyup(checkPasswordMatch);
         });
         </script>
+
+
         <!--Untuk sweetalert-->
 <?php if ($this->session->flashdata('m','value')): ?>
   <script type="text/javascript">
   swal("Good job!", "Data Has Ben Saved!", "success")
+  </script>
+<?php endif; ?>
+<?php if ($this->session->flashdata('duplikat','value')): ?>
+  <script type="text/javascript">
+  swal("Duplikat Entri!", "Data Has Ben Double!", "error")
   </script>
 <?php endif; ?>
 <?php if ($this->session->flashdata('item','value')): ?>
@@ -270,6 +277,49 @@ showLoaderOnConfirm: true
 
 </script>
 <script type="text/javascript">
+function ship($d) {
+var id = $d;
+  swal({
+title: "Are you sure?",
+text: "You will not be able to recover this Ship!",
+type: "warning",
+showCancelButton: true,
+closeOnConfirm: false,
+showLoaderOnConfirm: true
+},
+
+
+ function (isConfirm) {
+
+
+
+    var url1= "<?php echo site_url('ajax/deleteship/') ?>";
+
+      if (!isConfirm) return;
+      $.ajax({
+          url: url1+id,
+          type: "POST",
+
+          dataType: "HTML",
+          success: function () {
+              setTimeout(function () {
+                  swal(" request finished!");
+                  window.location.reload();
+        }, 4000);
+
+
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error deleting!", "Please try again", "error");
+          }
+
+      });
+
+});
+}
+
+</script>
+<script type="text/javascript">
 function carrier($d) {
 var id = $d;
   swal({
@@ -312,7 +362,6 @@ showLoaderOnConfirm: true
 }
 
 </script>
-
 <!--Untuk sweetalert-->
 
 
@@ -394,6 +443,15 @@ showLoaderOnConfirm: true
         "serverSide": true,
         "ajax": "<?php echo site_url('ajax/users'); ?>"
       });
+      $('#wh').dataTable({
+        keys: true,
+        "processing": true,
+        "serverSide": true,
+         responsive: true,
+       fixedHeader: true,
+       "serverSide": true,
+       "ajax": "<?php echo site_url('ajax/wh'); ?>"
+     });
       $('#vendor').dataTable({
         keys: true,
         "processing": true,
@@ -412,6 +470,15 @@ showLoaderOnConfirm: true
       "serverSide": true,
       "ajax": "<?php echo site_url('ajax/carrier'); ?>"
     });
+    $('#ship').dataTable({
+      keys: true,
+      "processing": true,
+      "serverSide": true,
+       responsive: true,
+     fixedHeader: true,
+     "serverSide": true,
+     "ajax": "<?php echo site_url('ajax/ship'); ?>"
+   });
       $('#item').dataTable({
         keys: true,
         "processing": true,

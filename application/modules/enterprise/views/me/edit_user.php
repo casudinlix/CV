@@ -63,17 +63,26 @@
  <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key ?>" checked="checked"><?php echo $key ?>
                         </label>
                       <?php endforeach; ?>
-                      <?php foreach ($wh as $key): ?>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" class="flat" name="wh[]" value="<?php echo $key->nama_wh ?>"><?php echo $key->nama_wh ?>
-                          </label>
-                        </div>
-                      <?php endforeach; ?>
-
-
-
-
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" class="flat" name="wh[]" value="Cikarang">Cikarang
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" class="flat" name="wh[]" value="Bandung"> Bandung
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" class="flat" name='wh[]' value="Jakarta"> Jakarta
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" class="flat" name="wh[]" value="Enterprise">Enterprise
+                        </label>
+                      </div>
 
                     </div>
 

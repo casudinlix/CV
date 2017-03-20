@@ -108,6 +108,7 @@ public function po()
   if ($this->session->userdata('login')==TRUE) {
     $data['whe']=$this->session->userdata('wh1');
     $data['role']=$this->session->userdata('role')=='super-user';
+    $data['admin']=$this->session->userdata('role')=='admin';
     $data['title']='WMS-Rumah Kreasi';
     $data['namaku']=$this->session->userdata('nama');
     $data['akses']=$this->session->userdata('wh');
@@ -117,7 +118,7 @@ public function po()
     if ($this->session->userdata('role')=='super-admin') {
       $data['gudang']=$this->db->get('wh')->row_array();
     }
-    $data['gudang']=$this->db->get_where('wh',array('role'=>'all'))->result_array();
+    $data['gudang']=$this->db->get_where('wh')->result_array();
 
 
     $this->load->view('dashboard1',$data);
@@ -131,12 +132,16 @@ public function create_po()
 {
   if ($this->session->userdata('login')==TRUE) {
     $data['role']=$this->session->userdata('role')=='super-user';
+
     $this->load->model('m_produk');
     $data['kode']=$this->m_produk->create_po();
+    $data['kode1']=$this->m_produk->pointernal();
     $data['whe']=$this->session->userdata('wh1');
     $data['title']='WMS-Rumah Kreasi';
     $data['type']=$this->db->get('m_type_po')->result();
     $data['po']=$this->db->get_where('m_po_detil',array('po_num'=>$this->m_produk->create_po()))->result();
+    $data['po1']=$this->db->get_where('m_po_detil',array('po_num'=>$this->m_produk->pointernal()))->result();
+
     $data['namaku']=$this->session->userdata('nama');
     $data['akses']=$this->session->userdata('wh');
     $data['wh2']=$this->session->userdata('pilih');
@@ -156,6 +161,7 @@ public function poprint($value='')
 {
   $this->load->model('m_produk');
   $data['kode']=$this->m_produk->create_po();
+
   $data['whe']=$this->session->userdata('wh1');
   $data['title']='WMS-Rumah Kreasi';
   $data['po']=$this->db->get_where('m_po_detil',array('po_num'=>$this->m_produk->create_po()))->result();
@@ -195,6 +201,53 @@ public function edit_po()
 }
 public function asn()
 {
-  
+  if ($this->session->userdata('login')==TRUE) {
+    $data['whe']=$this->session->userdata('wh1');
+    $data['role']=$this->session->userdata('role')=='super-user';
+    $data['title']='WMS-Rumah Kreasi';
+    $data['namaku']=$this->session->userdata('nama');
+    $data['akses']=$this->session->userdata('wh');
+    $data['wh2']=$this->session->userdata('pilih');
+    $data['me']=$this->session->userdata('nip');
+    $data['aku']=$this->db->get_where('users',array('nip'=>$this->session->userdata('nip')))->row_array();
+    if ($this->session->userdata('role')=='super-admin') {
+      $data['gudang']=$this->db->get('wh')->row_array();
+    }
+    $data['gudang']=$this->db->get_where('wh',array('role'=>'all'))->result_array();
+
+
+    $this->load->view('dashboard1',$data);
+    $this->load->view('asn/asn',$data);
+    $this->load->view('bawah',$data);
+  }else{
+      redirect('dashboard');
+  }
+}
+public function pointernal($value='')
+{
+  if ($this->session->userdata('login')==TRUE) {
+    $data['role']=array($this->session->userdata('role')=='super-user',$this->session->userdata('role')=='admin');
+    $this->load->model('m_produk');
+
+    $data['kode']=$this->m_produk->pointernal();
+    $data['whe']=$this->session->userdata('wh1');
+    $data['title']='WMS-Rumah Kreasi';
+    $data['type']=$this->db->get('m_type_po')->result();
+
+    $data['po']=$this->db->get_where('m_po_detil',array('po_num'=>$this->m_produk->pointernal()))->result();
+
+    $data['namaku']=$this->session->userdata('nama');
+    $data['akses']=$this->session->userdata('wh');
+    $data['wh2']=$this->session->userdata('pilih');
+    $data['me']=$this->session->userdata('nip');
+
+
+    $this->load->view('dashboard1',$data);
+    $this->load->view('po/pointernal',$data);
+    $this->load->view('bawah',$data);
+  }else{
+      redirect('dashboard');
+  }
+
 }
 }
